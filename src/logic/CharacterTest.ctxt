@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=
+comment0.target=void\ setUp()
+comment0.text=\r\n\ Prepare\ the\ tested\ instances\ and\ perform\ the\ the\ actions,\r\n\ which\ should\ be\ performed\ before\ any\ test.\r\n
+comment1.params=
+comment1.target=void\ tearDown()
+comment1.text=\r\n\ Cleans\ up\ and\ perform\ the\ the\ actions,\r\n\ which\ should\ be\ performed\ after\ each\ test.\r\n
+comment2.params=
+comment2.target=void\ characterTest()
+numComments=3
