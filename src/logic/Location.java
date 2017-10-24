@@ -41,6 +41,11 @@ public class Location {
     private Map<String,Item> listOfItems;
     private boolean hasCharacter = false;
     private Character characterHere;
+
+    private double posX;
+    private double posY;
+
+
     
     /**
      * Konstruktor třídy Location vytváří lokace ("místnosti") ve hře, mezi
@@ -52,7 +57,7 @@ public class Location {
      * slov: forest, crossroad, cottage, coast, sea, bridge, under bridge, 
      * in front of store, store, cave entry, secret place
      */
-    public Location(String id, String name){
+    public Location(String id, String name, double posX, double posY){
         this.id = id;
         this.name = name;
         switch(name){
@@ -97,7 +102,10 @@ public class Location {
                 this.description = "This place doesn't exist";
         }
         this.waysOut = new HashMap<>();
-        this.listOfItems = new HashMap<>();        
+        this.listOfItems = new HashMap<>();
+
+        this.posX = posX;
+        this.posY = posY;
     }
     
     /**
@@ -381,6 +389,13 @@ public class Location {
         hash = 67 * hash + Objects.hashCode(this.id);
         return hash;
     }
-    
-    
+
+
+    public double getPosX() {
+        return posX;
+    }
+
+    public double getPosY() {
+        return posY;
+    }
 }

@@ -86,24 +86,24 @@ public class GamePlan {
      */
     private void createMap(){
         //Založí všechny lokace hry
-        cottage = new Location("A1","cottage");
+        cottage = new Location("A1","cottage",1,1);
         currentLocation = cottage;
         previousLocation = currentLocation;
-        forest1 = new Location("A2","forest");
-        coast = new Location("A3","coast");
-        sea1 = new Location("A4","sea");
-        sea2 = new Location("A5","sea");
-        crossroad = new Location("B1","crossroad");
-        forest2 = new Location("B2","forest");
-        forest3 = new Location("B3","forest");
-        forest4 = new Location("C1","forest");
-        bridge = new Location("C2","bridge");
-        underBridge = new Location("C3","under bridge");
-        inFrontOfStore = new Location("C4","in front of store");
-        store = new Location("C5","store");
-        forest5 = new Location("D1","forest");
-        caveEntry = new Location("F1","cave entry");
-        secretPlace = new Location("SP","secret place");
+        forest1 = new Location("A2","forest",2,1);
+        coast = new Location("A3","coast",3,1);
+        sea1 = new Location("A4","sea",3,0);
+        sea2 = new Location("A5","sea",4,1);
+        crossroad = new Location("B1","crossroad",1,2);
+        forest2 = new Location("B2","forest",2,2);
+        forest3 = new Location("B3","forest",3,2);
+        forest4 = new Location("C1","forest",1,3);
+        bridge = new Location("C2","bridge",2,3);
+        underBridge = new Location("C3","under bridge",2,4);
+        inFrontOfStore = new Location("C4","in front of store",3,3);
+        store = new Location("C5","store",0,0);
+        forest5 = new Location("D1","forest",0,0);
+        caveEntry = new Location("F1","cave entry",0,0);
+        secretPlace = new Location("SP","secret place",0,0);
         
         //Přidá každé lokaci jejich sousední lokace
         cottage.addWay("S", crossroad);

@@ -105,7 +105,7 @@ public class Game implements IGame{
             parameters[i] = words[i+shift];
         }
         if(commands.isValidCommand(commandWord)){
-            lastValidCommand = commands.getCommand(commandWord);
+            setLastValidCommand(commandWord);
             toBeTyped = lastValidCommand.execute(parameters);
             commands.updateCommands();
             if(gamePlan.getCurrentLocation().getHasCharacter()){

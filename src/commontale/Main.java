@@ -2,12 +2,15 @@ package commontale;
 
 import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
@@ -18,6 +21,8 @@ import javafx.stage.Stage;
 import logic.Game;
 import logic.IGame;
 import ui.TextInterface;
+
+import java.awt.*;
 
 
 public class Main extends Application {
@@ -37,6 +42,9 @@ public class Main extends Application {
             }
         }
     }
+
+    ListView<String> colorsList;
+    ObservableList<String> colorsData;
 
     @Override
     public void start(Stage primaryStage) {
