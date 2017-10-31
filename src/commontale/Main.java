@@ -1,31 +1,30 @@
 package commontale;
 
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
+import gui.Map;
+import gui.MyOwnMenuBar;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.Game;
 import logic.IGame;
 import ui.TextInterface;
 
-import java.awt.*;
-
 
 public class Main extends Application {
+
+    private TextArea centralText;
+    private IGame game;
+    private Map map;
+    private TextField addCommand;
+    private MyOwnMenuBar menuBar;
 
     public static void main(String[] args) {
         if(args.length == 0)
@@ -43,44 +42,69 @@ public class Main extends Application {
         }
     }
 
-    ListView<String> colorsList;
-    ObservableList<String> colorsData;
-
     @Override
     public void start(Stage primaryStage) {
-        /*Button btn = new Button();
-        btn.setText("Enter the common world..");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                IGame game = new Game();
-                TextInterface ui = new TextInterface(game);
-                ui.play();
-            }
-        });*/
-
-        IGame game = new Game();
+        setGame(new Game());
+        map = new Map(game);
+        menuBar = new MyOwnMenuBar(game,this);
         /*TextInterface uiGame = new TextInterface(game);
         uiGame.play();*/
-
         BorderPane borderPane = new BorderPane();
 
-        Text centralText = new Text();
-        centralText.setText(game.returnWelcome());
-        borderPane.setCenter(centralText);
+        centralText = new TextArea();
+        getCentralText().setText(game.returnWelcome());
+        getCentralText().setEditable(false);
+        borderPane.setCenter(getCentralText());
 
-        Label setCommand = new Label("Set command");
+        borderPane.setLeft(map);
+
+        Label setCommand = new Label("Set command: ");
         setCommand.setFont(Font.font("Arial", FontWeight.BOLD,14));
+
+        addCommand = new TextField("");
+        addCommand.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                String userCommand = addCommand.getText();
+                String gameAnswer = game.compileCommand(userCommand);
+
+                getCentralText().appendText("\n" + userCommand + "\n");
+                getCentralText().appendText("\n" + gameAnswer + "\n");
+
+                addCommand.setText("");
+
+                if(game.isOver()) {
+                    addCommand.setEditable(false);
+                    getCentralText().appendText("\n" + game.returnEpilogue());
+                }
+
+            }
+        });
 
         FlowPane bottomPanel = new FlowPane();
         bottomPanel.setAlignment(Pos.CENTER);
-        bottomPanel.getChildren().add(setCommand);
+        bottomPanel.getChildren().addAll(setCommand, addCommand);
+
         borderPane.setBottom(bottomPanel);
+        borderPane.setLeft(map);
+        borderPane.setTop(menuBar);
 
         Scene scene = new Scene(borderPane,1400,600);
 
         primaryStage.setTitle("Welcome to the common world!");
         primaryStage.setScene(scene);
         primaryStage.show();
+        addCommand.requestFocus();
+    }
+
+    public Map getMap(){ return map;}
+
+    public TextArea getCentralText() {
+        return centralText;
+    }
+
+    public void setGame(IGame game) {
+        this.game = game;
     }
 }

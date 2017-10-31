@@ -63,7 +63,7 @@ public class ItemTest
         item = new Item("pole");
         item1 = new Item("item");
         
-        loc = new Location("A1", "crossroad");
+        loc = new Location("A1", "crossroad",0,0);
         
         chest = new Item("chest");
         key = new Item("key");

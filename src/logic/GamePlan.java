@@ -1,10 +1,9 @@
 package logic;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import util.Subject;
+import util.Observer;
+
+import java.util.*;
 
 /**
  * Třída představující herní plán. Spouští se při startu hry a vytváří herní
@@ -13,7 +12,7 @@ import java.util.Random;
  * @author  Lukas Ruzicka
  * @version LS 2016/2017
  */
-public class GamePlan {
+public class GamePlan implements Subject{
     private Location currentLocation;
     private Location previousLocation;
     private final Game game;
@@ -66,6 +65,8 @@ public class GamePlan {
     private boolean sharkOnMap;
     private Character dragon;
     private Character charSecretPlace;
+
+    private List<Observer> listObserver = new ArrayList<>();
     
     
     /**
@@ -488,5 +489,22 @@ public class GamePlan {
      */
     public Character returnCharSecretPlace(){
         return charSecretPlace;
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        listObserver.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        listObserver.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(Observer item : listObserver){
+            item.update();
+        }
     }
 }

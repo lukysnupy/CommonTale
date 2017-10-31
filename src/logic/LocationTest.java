@@ -59,9 +59,9 @@ public class LocationTest
     @Before
     public void setUp()
     {
-        crossroad = new Location("A1","crossroad");
-        crossroad2 = new Location("A2","crossroad");
-        crossroad3 = new Location("A1","crossroad");
+        crossroad = new Location("A1","crossroad",0,0);
+        crossroad2 = new Location("A2","crossroad",0,0);
+        crossroad3 = new Location("A1","crossroad",0,0);
         
         game = new Game();
         

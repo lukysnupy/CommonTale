@@ -66,7 +66,7 @@ public class CharacterTest
         char3 = new Character(game,"fakeman",false,false);
         char4 = new Character(game,"man",false,false);
         item = new Item("pole");
-        loc = new Location("A1","crossroad");
+        loc = new Location("A1","crossroad",0,0);
         
         char1.addFirstSpeech("ahoj", "cau");
         char2.addFirstSpeech("ahoj");

@@ -42,8 +42,8 @@ public class Location {
     private boolean hasCharacter = false;
     private Character characterHere;
 
-    private double posX;
-    private double posY;
+    private double posTop;
+    private double posLeft;
 
 
     
@@ -57,7 +57,7 @@ public class Location {
      * slov: forest, crossroad, cottage, coast, sea, bridge, under bridge, 
      * in front of store, store, cave entry, secret place
      */
-    public Location(String id, String name, double posX, double posY){
+    public Location(String id, String name, double posTop, double posLeft){
         this.id = id;
         this.name = name;
         switch(name){
@@ -104,8 +104,8 @@ public class Location {
         this.waysOut = new HashMap<>();
         this.listOfItems = new HashMap<>();
 
-        this.posX = posX;
-        this.posY = posY;
+        this.posTop = posTop;
+        this.posLeft = posLeft;
     }
     
     /**
@@ -391,11 +391,11 @@ public class Location {
     }
 
 
-    public double getPosX() {
-        return posX;
+    public double getPosTop() {
+        return posTop;
     }
 
-    public double getPosY() {
-        return posY;
+    public double getPosLeft() {
+        return posLeft;
     }
 }
