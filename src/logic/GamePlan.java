@@ -317,8 +317,10 @@ public class GamePlan implements Subject{
             homelessOnMap = false;
         }
         if(rand.nextBoolean()){
-            homeless.returnShuffleLocation().addCharacter(homeless);
-            homelessOnMap = true;
+            if(game.getLevel() > 1){
+                homeless.returnShuffleLocation().addCharacter(homeless);
+                homelessOnMap = true;
+            }
         }
         
         if(game.getLevel() > 6){
