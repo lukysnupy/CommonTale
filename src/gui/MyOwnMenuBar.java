@@ -39,7 +39,8 @@ public class MyOwnMenuBar extends MenuBar {
         newFile.getItems().addAll(newGame,exitGame);
 
         MenuItem about = new MenuItem("About");
-        MenuItem helpItem = new MenuItem("Help");
+        MenuItem helpItem = new MenuItem("Help (CZ)");
+        helpItem.setAccelerator(KeyCombination.keyCombination("ctrl+H"));
 
         help.getItems().addAll(about,helpItem);
 
