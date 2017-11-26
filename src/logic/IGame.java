@@ -48,4 +48,6 @@ public interface IGame {
      */
      public GamePlan getGamePlan();
 
+     public boolean getTalking();
+
 }

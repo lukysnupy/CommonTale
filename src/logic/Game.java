@@ -202,4 +202,9 @@ public class Game implements IGame{
     public boolean fullBag(){
         return bag.bagContentCount() == 2;
     }
+
+    @Override
+    public boolean getTalking(){
+        return talking;
+    }
 }

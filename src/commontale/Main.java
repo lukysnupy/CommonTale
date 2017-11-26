@@ -52,8 +52,6 @@ public class Main extends Application {
         setGame(new Game());
         map = new Map(game);
         menuBar = new MyOwnMenuBar(game,this);
-        /*TextInterface uiGame = new TextInterface(game);
-        uiGame.play();*/
         BorderPane borderPane = new BorderPane();
 
         centralText = new TextArea();
@@ -62,9 +60,36 @@ public class Main extends Application {
         getCentralText().setWrapText(true);
         borderPane.setCenter(getCentralText());
 
+        Label setGo = new Label("Set where you want to go: ");
+        setGo.setFont(Font.font("Arial", FontWeight.BOLD,14));
+
+        addGo = new TextField("");
+        addGo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                String userCommand = addGo.getText();
+                if(userCommand.split("[ \t]+")[0].equals("go")){
+                    String gameAnswer = game.compileCommand(userCommand);
+
+                    getCentralText().appendText("\n" + userCommand + "\n");
+                    getCentralText().appendText("\n" + gameAnswer + "\n");
+
+                    map.update();
+                }
+                else{
+                    getCentralText().appendText("\n\nIf you want to do something other from going somewhere just use " +
+                            "the other window for that..\n\n");
+                    addCommand.requestFocus();
+                }
+
+                addGo.setText("");
+            }
+        });
+
         Label setCommand = new Label("Set command: ");
         setCommand.setFont(Font.font("Arial", FontWeight.BOLD,14));
-        setCommand.setPadding(new Insets(0,0,0,100));
+        setCommand.setPadding(new Insets(0,0,0,70));
 
         addCommand = new TextField("");
         addCommand.setOnAction(new EventHandler<ActionEvent>() {
@@ -83,15 +108,29 @@ public class Main extends Application {
 
                 if(game.isOver()) {
                     addCommand.setEditable(false);
+                    addGo.setEditable(false);
                     getCentralText().appendText("\n" + game.returnEpilogue());
                 }
 
+                if(game.getTalking()){
+                    addGo.setEditable(false);
+                    addGo.setText("SPEAKING..");
+                    addCommand.requestFocus();
+                }
+                else{
+                    addGo.setText("");
+                    addGo.setEditable(true);
+                    if(userCommand.split("[ \t]+")[0].equals("go"))
+                        addGo.requestFocus();
+                    else
+                        addCommand.requestFocus();
+                }
             }
         });
 
         FlowPane bottomPanel = new FlowPane();
         bottomPanel.setAlignment(Pos.CENTER);
-        bottomPanel.getChildren().addAll(setCommand, addCommand);
+        bottomPanel.getChildren().addAll(setGo, addGo, setCommand, addCommand);
 
         borderPane.setBottom(bottomPanel);
         borderPane.setRight(map);
@@ -102,7 +141,7 @@ public class Main extends Application {
         primaryStage.setTitle("Welcome to the common world!");
         primaryStage.setScene(scene);
         primaryStage.show();
-        addCommand.requestFocus();
+        addGo.requestFocus();
     }
 
     public Map getMap(){ return map;}
