@@ -2,15 +2,16 @@ package commontale;
 
 import gui.Map;
 import gui.MyOwnMenuBar;
+import gui.Room;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -24,6 +25,7 @@ public class Main extends Application {
     private TextArea centralText;
     private IGame game;
     private Map map;
+    private Room room;
     private TextField addGo;
     private TextField addCommand;
     private MyOwnMenuBar menuBar;
@@ -51,6 +53,7 @@ public class Main extends Application {
 
         setGame(new Game());
         map = new Map(game);
+        room = new Room(game);
         menuBar = new MyOwnMenuBar(game,this);
         BorderPane borderPane = new BorderPane();
 
@@ -76,6 +79,7 @@ public class Main extends Application {
                     getCentralText().appendText("\n" + gameAnswer + "\n");
 
                     map.update();
+                    room.update();
                 }
                 else{
                     getCentralText().appendText("\n\nIf you want to do something other from going somewhere just use " +
@@ -103,6 +107,7 @@ public class Main extends Application {
                 getCentralText().appendText("\n" + gameAnswer + "\n");
 
                 map.update();
+                room.update();
 
                 addCommand.setText("");
 
@@ -132,11 +137,22 @@ public class Main extends Application {
         bottomPanel.setAlignment(Pos.CENTER);
         bottomPanel.getChildren().addAll(setGo, addGo, setCommand, addCommand);
 
+        VBox leftPanel = new VBox();
+        leftPanel.setAlignment(Pos.CENTER);
+        map.setPadding(new Insets(0,0,15,0));
+        Label roomLabel = new Label("Room: ");
+        setCommand.setFont(Font.font("Arial", FontWeight.BOLD,14));
+        setCommand.setPadding(new Insets(2,2,2,5));
+        HBox roomBox = new HBox();
+        roomBox.setAlignment(Pos.CENTER);
+        roomBox.getChildren().addAll(roomLabel, room);
+        leftPanel.getChildren().addAll(map, roomBox);
+
         borderPane.setBottom(bottomPanel);
-        borderPane.setRight(map);
+        borderPane.setLeft(leftPanel);
         borderPane.setTop(menuBar);
 
-        Scene scene = new Scene(borderPane,1400,600);
+        Scene scene = new Scene(borderPane,1400,780);
 
         primaryStage.setTitle("Welcome to the common world!");
         primaryStage.setScene(scene);
@@ -156,5 +172,9 @@ public class Main extends Application {
 
     public Stage getStage() {
         return stage;
+    }
+
+    public Room getRoom() {
+        return room;
     }
 }

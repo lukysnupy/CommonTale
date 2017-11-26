@@ -241,7 +241,16 @@ public class Location {
     public boolean haveWay(String direction){
         return waysOut.containsKey(direction);
     }
-    
+
+    public String getDirection(Location location){
+        String[] directions = {"N","E","S","W"};
+        for(String direction: directions){
+            if(this.haveWay(direction))
+                if(this.getNextLocation(direction).equals(location))
+                    return direction;
+        }
+        return "N";
+    }
     
     
     /**
