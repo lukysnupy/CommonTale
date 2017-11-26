@@ -5,6 +5,7 @@ import gui.MyOwnMenuBar;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -23,6 +24,7 @@ public class Main extends Application {
     private TextArea centralText;
     private IGame game;
     private Map map;
+    private TextField addGo;
     private TextField addCommand;
     private MyOwnMenuBar menuBar;
     private Stage stage;
@@ -62,6 +64,7 @@ public class Main extends Application {
 
         Label setCommand = new Label("Set command: ");
         setCommand.setFont(Font.font("Arial", FontWeight.BOLD,14));
+        setCommand.setPadding(new Insets(0,0,0,100));
 
         addCommand = new TextField("");
         addCommand.setOnAction(new EventHandler<ActionEvent>() {
