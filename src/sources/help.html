@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+<!--  <title>java.vse.cz : Výuka programování a softwarového inženýrství na KIT VŠE </title> -->
+  <title>java.vse.cz : Výuka programování a softwarového inženýrství na KIT VŠE </title>
+  <meta http-equiv='Content-Language' content='cs' />
+  <meta http-equiv='Content-Style-Type' content='text/css' />
+  <meta http-equiv="imagetoolbar" content="no" />
+  <meta name='MSSmartTagsPreventParsing' content='true' />
+  <link rel='icon' href='https://java.vse.cz/wiki/pub/skins/light/lighticon.gif' type='image/gif' />
+  <link rel='SHORTCUT ICON' href='https://java.vse.cz/wiki/pub/skins/light/lighticon.gif' />
+  <link rel='stylesheet' href='https://java.vse.cz/wiki/pub/skins/light/light.css' type='text/css' />
+  <!--HeaderText--><style type='text/css'><!--
+  ul, ol, pre, dl, p { margin-top:0px; margin-bottom:0px; }
+  code.escaped { white-space: nowrap; }
+  .vspace { margin-top:1.33em; }
+  .indent { margin-left:40px; }
+  .outdent { margin-left:40px; text-indent:-40px; }
+  a.createlinktext { text-decoration:none; border-bottom:1px dotted gray; }
+  a.createlink { text-decoration:none; position:relative; top:-0.5em;
+    font-weight:bold; font-size:smaller; border-bottom:none; }
+  img { border:0px; }
+  
+div.sourceblock {
+	padding: 0.5em;
+	border: 1px solid #808080;
+	background-color: #F1F0ED;
+	width:98%;
+	white-space: nowrap;
+	overflow: auto; }
+div.sourceblock div {
+	font-family: monospace;
+	font-size: 1.1em;
+	line-height: 1.1em;
+	 }
+div.sourceblock div.head, div.sourceblock div.foot {
+	font: italic medium serif;
+	padding: 0.5em;
+}
+div.codeblock {
+	padding: 0.5em;
+	border: 1px solid #808080;
+	background-color: #F1F0ED; }
+div.codeblock pre {
+	font-family: monospace;
+	font-size: 1.3em;
+	line-height: 1.2em; }.editconflict { color:green; 
+  font-style:italic; margin-top:1.33em; margin-bottom:1.33em; }
+
+  #mainsidebar { border-left:1px solid #cccccc; border-right:0px; } 
+  #sitehead, #siteadmintop, #siteadminbtm, #sitemain, #sitefoot {
+    width:100%; }
+  #sitehead { margin:0px; }
+  #sitehead { padding-top:2px; border-top:0px; }
+  #maincontent { width:100%; }
+  #mainsidebar { width:165px; }
+  #wikiedit textarea { width:99%; }
+  body { background-color:#e5e0d5; margin:9px; margin-bottom:0px;
+    margin-top:0px; }
+  a { font-weight:bold; color:#552704; text-decoration:none; }
+  a:visited { font-weight:bold; color:#664433; text-decoration:none; }
+  a:hover { font-weight:bold; color:#552704; text-decoration:underline; }
+  a:active { font-weight:bold; color:#9c0606; }
+  #sitehead, #sitehead td, #mainsidebar { background-color:#e5e0d5; border-color:#a99774; }
+  #sitehead a { color:#333333; text-decoration:none; }
+  #mainsidebar { font-size:1.1em; color:#333333; border-left:1px solid #a99774; border-right:0px; font-weight:bold; }
+  #mainsidebar h1, #mainsidebar h5, #mainsidebar h6, #mainsidebar .divider,
+    #mainsidebar .wikisearch, #mainsidebar .newpage, #mainsidebar .sidehead {
+    color:#333333; background-color:#dbd4c6; border-color:#a99774; } 
+  #mainsidebar h1 { font-weight:bold; } 
+  #maincontent { background-color:#f6f4f1; border-color:#a99774; }
+  #maincontent a, #maincontent a:visited {  color:#776e64; text-decoration:underline; }
+  #maincontent a:hover, #maincontent a:active { color:#9c0606; text-decoration:underline; }
+  #footeditsb { display: none; }
+  #sitesole, #sitesole a, #sitesole a:visited, #sitesole a:hover { color:#999999; }
+  #location .grouplink, #location .separator, #location .titlelink { display:none; }
+
+ 
+  #sidebarbottom { display:none; } 
+  #headbrowse { display:none; }
+  table.markup { border:2px dotted #ccf; width:90%; }
+  td.markup1, td.markup2 { padding-left:10px; padding-right:10px; }
+  table.vert td.markup1 { border-bottom:1px solid #ccf; }
+  table.horiz td.markup1 { width:23em; border-right:1px solid #ccf; }
+  table.markup caption { text-align:left; }
+  div.faq p, div.faq pre { margin-left:2em; }
+  div.faq p.question { margin:1em 0 0.75em 0; font-weight:bold; }
+  div.faqtoc div.faq * { display:none; }
+  div.faqtoc div.faq p.question 
+    { display:block; font-weight:normal; margin:0.5em 0 0.5em 20px; line-height:normal; }
+  div.faqtoc div.faq p.question * { display:inline; }
+   
+    .frame 
+      { border:1px solid #cccccc; padding:4px; background-color:#f9f9f9; }
+    .lfloat { float:left; margin-right:0.5em; }
+    .rfloat { float:right; margin-left:0.5em; }
+a.varlink { text-decoration:none; }
+
+--></style><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-200717-1', 'auto');
+  ga('send', 'pageview');
+
+</script>  <meta name='robots' content='index,follow' />
+  <link rel='stylesheet' href='https://java.vse.cz/wiki/pub/skins/light/light2.css' type='text/css' /><link rel='alternate' title='java.vse.cz RSS Feed'
+      href='https://java.vse.cz/Main/AllRecentChanges?action=rss'
+      type='application/rss+xml' />
+  <link rel='alternate' title='java.vse.cz Atom Feed'
+      href='https://java.vse.cz/Main/AllRecentChanges?action=atom'
+      type='application/atom+xml' />
+  <meta name='keywords' content='programování, objekty, java' />
+<meta name='description' content='Web věnovaný kursům programování na bakalářském oboru Aplikovaná informatika na VŠE a magisterském oboru Informační systémy a technologie, programování a výuce programování' />
+
+ </head>
+
+ <body>
+  <!--PageHeaderFmt-->
+  <table summary='Site Header' id='sitehead'
+   cellpadding='0' cellspacing='0' border='0' align='center'>
+   <tr>
+    <td id='headleft' title='java.vse.cz Home'>
+     <div id='headlogo'><img
+        src='https://java.vse.cz/wiki/pub/skins/light/kava.png' alt='java.vse.cz' border='0' /></div>
+    </td>
+    <td id='headmoto' title='java.vse.cz Home'>
+		<div id='headquote'>Když dostanete zprávu o chybě, napište nejdříve jednotkový test, který ji odhalí.</div>
+       <div id='headquoteauthor'>Martin Fowler</div>
+    </td>
+    <td id='headright'>
+     <div id='headcmdsupper'>
+      <!----><span class='headsearch'><a href='https://java.vse.cz/Site/Search'
+       title='Search the site' rel='nofollow'>Vyhledat</a>: </span><form
+       class='headsearch search' action='https://java.vse.cz'><input
+       class='searchbox' type='text' name='q' value='' size='40' /><input
+       class='searchbutton' type='submit' value='Přejít' /> 
+       <input type='hidden' name='n' value='' />
+       <input type='hidden' name='action' value='search' />
+      </form></div>
+     <div id='headcmdslower'>
+      </div>
+    </td>
+   </tr>
+  </table>
+  <!--/PageHeaderFmt-->
+  <!--PageAdminTopFmt--><!--/PageAdminTopFmt-->
+ 
+  <table summary='Site Main' id='sitemain'
+   cellpadding='0' cellspacing='0' border='0' align='center'>
+   <tr>
+    <!--PageLeftFmt-->
+    <td id='mainsidebar' >
+     <table summary='SideBar' id='sidebar' width='100%'
+      cellpadding='0' cellspacing='0' border='0'>
+      <tr><td>
+       <h1><a class='wikilink' href='https://java.vse.cz/4it101/4it101'>4IT101</a></h1>
+<ul><li><a class='wikilink' href='https://java.vse.cz/4it101/Prednasky'>přednášky</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/4it101/Pavlickova'>cvičení Ing. Pavlíčková</a> 
+</li><li><a class='urllink' href='http://vyuka.pecinovsky.cz/OFPA-1_17s/_VSE.html' rel='nofollow'>cvičení Ing. Pecinovský, CSc.</a>
+</li><li><a class='urllink' href='http://4it101.michus.cz' rel='nofollow'>cvičení Ing. Michalička</a>
+</li><li><a class='urllink' href='https://www.yammer.com/vse.cz/#/threads/inGroup?type=in_group&amp;feedId=12827482' rel='nofollow'>cvičení Ing. Říha</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/4it101/ZadaniAdventury'>zadáni semestrální úlohy (adventura)</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/4it101/Testy'>závěrečný test</a> 
+</li><li><a class='wikilink' href='https://java.vse.cz/4it101/Literatura'>literatura ke kursu</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/Java/Instalace'>instalace JDK</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/Java/BlueJInstalace'>instalace BlueJ</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/4it101/Projekty'>projekty ke kursu</a>
+</li><li><a class='urllink' href='http://java.vse.cz/bluej/index.php' rel='nofollow'>úvod k BlueJ a objektům (animace)</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/4it101/Adv'>rady k adventuře</a> 
+</li><li><a class='wikilink' href='https://java.vse.cz/4it101/Kopenogramy'>kopenogramy</a> 
+</li></ul><h1><a class='wikilink' href='https://java.vse.cz/4it115/4it115'>4IT115</a></h1>
+<ul><li><a class='wikilink' href='https://java.vse.cz/4it115/ZadaniPrvniUlohy'>zadání 1. úlohy</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/4it115/ZadaniDruheUlohy'>zadání 2. úlohy</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/4it115/OkruhyOtazek'>okruhy otázek</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/4it115/Buchalcevova'>cvičení doc. Buchalcevová</a>
+</li><li><a class='urllink' href='http://vyuka.pecinovsky.cz/OFPA-2_17s/_115.html' rel='nofollow'>cvičení Ing. Pecinovský, CSc.</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/4it115/Zenisek'>cvičení Ing. Ženíšek</a>
+</li><li><a class='urllink' href='http://java.vse.cz/modelyUML' rel='nofollow'>ukázky UML modelů v Astah*</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/4it115/Materialy'>materiály k JavaFX</a> 
+</li></ul><h1><a class='wikilink' href='https://java.vse.cz/4it353/HomePage'>4IT353</a></h1>
+<ul><li><a class='wikilink' href='https://java.vse.cz/4it353/Cviceni'>cvičení</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/4it353/ZadaniPrvniUlohy'>zadání 1. úlohy</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/4it353/ZadaniDruheUlohy'>zadání 2. úlohy</a>
+</li></ul><h1><a class='wikilink' href='https://java.vse.cz/Main/4it421'>4IT421</a></h1>
+<ul><li><a class='wikilink' href='https://java.vse.cz/4it421/OkruhyOtazek'>okruhy otázek</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/4it421/TemataSeminarek'>témata sem.prací</a>
+</li></ul><div class='vspace'></div><h1>Různé</h1>
+<ul><li><a class='wikilink' href='https://java.vse.cz/4it101/Konvence'>Konvence</a>
+</li><li><a class='urllink' href='http://download.oracle.com/javase/8/docs/api/' rel='nofollow'>Java API</a>
+</li><li><a class='urllink' href='http://download.oracle.com/javase/tutorial/index.html' rel='nofollow'>Java Tutorials</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/4it101/JUnit'>Jednotkové testování (JUnit)</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/Java/VyvojoveNastroje'>Vývojové nástroje</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/Java/NetBeansInstalace'>Instalace NetBeans</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/Java/NetBeansSubversion'>NetBeans a Subversion</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/Java/EclipseInstalace'>Instalace Eclipse</a>
+</li><li><a class='urllink' href='http://nb.vse.cz/~buchalc/pouzivanisubclipse.pdf' rel='nofollow'>Eclipse a Subversion</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/Main/Subversion'>Subversion, SmartSVN</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/Java/Adresare'>Adresářová struktura projektů v Javě</a>
+</li><li><a class='urllink' href='http://docs.oracle.com/javase/8/javase-clienttechnologies.htm' rel='nofollow'>JavaFX - nová knihovna pro tvorbu GUI v Javě 8</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/Main/VyukaProgramovani'>Výuka programování</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/Java/InformaceInternet'>Informace na Internetu</a>
+</li><li><a class='wikilink' href='https://java.vse.cz/Java/Skripta'>Skripta a texty</a>
+</li></ul>
+<div
+       id='sidebarbottom'><ul><li><span  style='color: gray;'><span style='font-size:83%'><a style='color: gray' class='wikilink' href='https://java.vse.cz/Main/LightLeftSideBarBottom?action=login'>Login</a></span>&nbsp;</span>
+</li></ul>
+</div></td></tr>
+     </table>
+    </td>
+    <!--/PageLeftFmt-->
+    <td id='maincontent'>
+     <table summary='Content' id='sitecontent' width='100%'
+      cellpadding='0' cellspacing='0' border='0'>
+      <tr><td> 
+       <!--PageTitleFmt-->
+       <div id='location'
+        title='Výuka programování a softwarového inženýrství na KIT VŠE was last modified on 2017-09-19 08:04' ><span
+        class='grouplink'>Main</span><span
+        class='separator'>&raquo;</span><span class='titlelink'>Výuka programování a softwarového inženýrství na KIT VŠE</span></div>
+       <div style='display:none;'><h1>Výuka programování a softwarového inženýrství na KIT VŠE</h1></div>
+       <!--/PageTitleFmt-->
+       <!--PageText-->
+<div id='wikitext'>
+<div class='vspace'></div><h1>Výuka programování a softwarového inženýrství na KIT VŠE</h1>
+<p>Na katedře informačních technologií se vyučuje několik kurzů, ve kterých se vyučuje programování a softwarové inženýrství, z nichž dva jsou povinné pro studenty studijního programu Aplikovaná informatika. Protože programovacím jazykem v povinných kurzech je z jedné poloviny Java, tyto stránky jsou k dispozici na adrese java.vse.cz. Nicméně kurzy, ke kterým jsou na těchto stránkách k dispozici informace, nejsou všechny o výuce v programovacím jazyce Java.
+</p>
+<div class='vspace'></div><h2>Povinné předměty:</h2>
+<h3><a class='wikilink' href='https://java.vse.cz/4it101/4it101'>4IT101 Programování v Javě</a></h3>
+<p>Tento kurz je určen pro začátečníky a je povinně volitelný pro studenty oboru Aplikovaná informatika, alternativou k němu je kurz Programování ve Visual Basic (4SA201). Pro studenty oboru Informační média a služby je kurz povinný. Je také volitelným kurzem vedlejší specializace Datové inženýrství.
+Výuka Javy je založena na přístupu object-first - cílem je studenty naučit používat a vytvářet objekty včetně pochopení základů komunikace mezi objekty. Výuka syntaxe jazyka či výuka algoritmů je doplňkem k výuce objektů.<br />V zimním semestru 2017/2018 <br /> - přednáší: <a class='wikilink' href='https://java.vse.cz/Profiles/JarmilaPavlickova'>Ing. Pavlíčková</a><br /> - cvičí:  <a class='wikilink' href='https://java.vse.cz/Profiles/JarmilaPavlickova'>Ing. Pavlíčková</a>, <a class='urllink' href='http://vyuka.pecinovsky.cz/OFPA-1_17s/_VSE.html' rel='nofollow'>Ing. Pecinovsky CSc.</a>, Ing. Jan Říha, Ing. Michalička
+</p>
+<div class='vspace'></div><h3><a class='wikilink' href='https://java.vse.cz/4it115/4it115'>4IT115 Softwarové inženýrství</a></h3>
+<p>Tento kurz navazuje na kurz Programování v Javě. V rámci cvičení se studenti učí základy objektového návrhu a jeho realizaci v Javě. Seznámí se také s nástrojem na správu verzí.<br />V zimním semestru 2017/2018 <br /> - přednáší: <a class='urllink' href='http://nb.vse.cz/~buchalc/' rel='nofollow'>doc. Buchalcevová</a>,  <a class='urllink' href='http://vyuka.pecinovsky.cz/OFPA-2_17s/_115.html' rel='nofollow'>Ing. Pecinovsky CSc.</a><br /> - cvičí: <a class='urllink' href='http://nb.vse.cz/~buchalc/' rel='nofollow'>doc. Buchalcevová</a>, <a class='urllink' href='http://vyuka.pecinovsky.cz/OFPA-2_17s/_115.html' rel='nofollow'>Ing. Pecinovsky CSc.</a>, Ing. Jan Ženíšek, 
+</p>
+<div class='vspace'></div><h2>Navazující volitelné předměty zabývající se programováním (nejen v Javě) určené pro studenty bakalářského studia</h2>
+<h3><a class='urllink' href='http://vyuka.pecinovsky.cz/vse/' rel='nofollow'>4IT252 Moderní programovací techniky</a></h3>
+<p>Tento kurs je určen pro studenty, kteří chtějí prohloubit své znalosti v programování např. o reflexi, serializaci, parametrické datové typy, regulárních výrazech a návrhových vzory. <br />Kurz vyučuje  <a class='urllink' href='http://vyuka.pecinovsky.cz/vse/' rel='nofollow'>Ing. Pecinovsky CSc.</a>. Kurz je vypisován nepravidelně, pokud není v registracích alespoň 15 zájemců, kurz je pro zápisy zrušen.
+</p>
+<div class='vspace'></div><h3><a class='wikilink' href='https://java.vse.cz/4it353/HomePage'>4IT353 Klient/server aplikace v Javě</a></h3>
+<p>Kurz je určen pro zájemce o rozšiřování znalostí jazyka Java. Předpokládá znalosti jazyka na úrovni 4IT115 a 4IT218.
+Kurz vyučuje  <a class='wikilink' href='https://java.vse.cz/Profiles/JarmilaPavlickova'>Ing. Pavlíčková</a>
+</p>
+<div class='vspace'></div><h2>Povinný předmět pro studenty magisterského navazujícího studia , obor Informační systémy a technologie</h2>
+<h3><a class='wikilink' href='https://java.vse.cz/Main/4it421'>4IT421 Zlepšování procesů budování IS</a> </h3>
+<p>Cílem předmětu je seznámit studenty s procesy při budování informačních systémů a možnostmi jejich zlepšování.<br />Kurz vyučuje <a class='urllink' href='http://nb.vse.cz/~buchalc/' rel='nofollow'>doc. Buchalcevová</a>
+</p>
+<div class='vspace'></div><h2>Navazující volitelné předměty zabývající se vývojem softwaru určené pro studenty navazujícího magisterského studia</h2>
+<div class='vspace'></div><h3><a class='urllink' href='http://vyuka.pecinovsky.cz/vse' rel='nofollow'>4IT422 Architektonické a návrhové vzory</a></h3>
+<p>Cílem předmětu je naučit studenty navrhovat programy podle zásad moderního programování a využívat přitom architektonické a návrhové vzory. Studenti naučí efektivně vytvářet aplikace, které budou robustní a přitom snadno modifikovatelné a udržovatelné.<br />Předmět je vypisován nepravidelně. Pokud máte zájem o tento kurz, nezapomeňte se registrovat. Při zájmu menším než 15 studentů nebude kurz v zápisech k dispozici.<br />Kurz vyučuje <a class='urllink' href='http://vyuka.pecinovsky.cz/vse/' rel='nofollow'>Ing. Pecinovsky CSc.</a>.
+</p>
+<div class='vspace'></div><h3><a class='urllink' href='https://isis.vse.cz/katalog/syllabus.pl?predmet=101584;zpet=/katalog/index.pl?obdobi=141,jak=dle_jmena' rel='nofollow'>4IT442 Softwarový projekt</a></h3>
+<p>Cílem předmětu je umožnit studentům vyzkoušet si realizaci projektu vývoje softwaru v týmu od specifikace požadavků až po prototyp implementace na základě definované metodiky. Předmět umožní studentům řešit reálné problémy, se kterými se při vývoji softwaru setkají.<br />Kurz je vypisován vždy v letním semestru. <br />Kurz vyučují doc. Buchalcevová a Ing. Stanovská
+</p>
+<div class='vspace'></div><h3><a class='urllink' href='http://4it445.vse.cz/' rel='nofollow'>4IT445 Agilní vývoj webových aplikací</a></h3>
+<p>Cílem předmětu je prakticky představit moderní vývoj webových aplikací postavených na PHP a Javascriptu s využitím dostupných frameworků, komponent a webových služeb. Při vývoji je používána metodika Scrum. Kurz bude vypisován pouze v zimních semestrech. Pokud máte zájem o tento kurz, nezapomeňte se registrovat. Při zájmu menším než 15 studentů nebude kurz v zápisech k dispozici. <br />
+</p><h3><a class='urllink' href='https://isis.vse.cz/katalog/syllabus.pl?zpet=/katalog/index.pl?vzorek=4IT446,Dohledat=Dohledat,obdobi=141,jak=dle_jmena;predmet=101577' rel='nofollow'>4IT446 Řízení kvality softwaru</a></h3>
+<p>Cílem předmětu je seznámit studenty s problematikou řízení kvality softwaru, zejména s ověřováním kvality pomocí testování. Studenti získají i praktické zkušenosti z různých aspektů testování.<br />Kurz vyučuje: Ing. Doležel
+</p>
+<div class='vspace'></div>
+</div>
+
+      </td></tr>
+     </table>
+    </td>
+    <!--PageRightFmt--><!--/PageRightFmt-->
+   </tr>
+  </table>
+  <!--PageAdminBtmFmt--><!--/PageAdminBtmFmt-->
+  <table summary='Site Footer' id='sitefoot'
+   cellpadding='0' cellspacing='0' border='0' align='center'>
+   <!--PageFooterFmt-->
+   <tr>
+    <td id='footleft'>
+     <span id='footedit'><a href='https://java.vse.cz/Main/HomePage?action=edit'
+       title='(E)dit this page' rel='nofollow'
+       accesskey='e'>Upravit</a>
+     </span><span id='foothist'>|
+      <a href='https://java.vse.cz/Main/HomePage?action=diff'
+       title='(H)istory of this page' rel='nofollow'
+       accesskey='h'>Historie stránky</a></span>
+	<span id='footupload'>|
+      		<a href='https://java.vse.cz/Main/HomePage?action=upload'
+       	title='Upload file(s)' rel='nofollow'
+       	accesskey='ak_upload'>Upload files</a></span>
+    </td>
+    <td id='footmiddle'>
+     <span id='footlastmod'>Poslední úprava stránky: 2017-09-19 08:04</span> 
+    </td>
+    <td id='footright'>
+     <span id='footchanges'><a href='https://java.vse.cz/Main/RecentChanges'
+       title='Recent (C)hanges in this section'  rel='nofollow'
+       accesskey='c'>Poslední úpravy</a>
+      <a href='https://java.vse.cz/Main/AllRecentChanges'
+       title='(A)ll Recent changes for the entire site' rel='nofollow'
+       accesskey='a'>(All)</a>
+     </span><span id='footeditsb'>|
+      <a href='https://java.vse.cz/Site/SideBar?action=edit'
+       title='Edit the Side(B)ar' rel='nofollow'
+       accesskey='b'>Edit SideBar</a></span><span id='footeditlogin'> |
+       <a href='https://java.vse.cz/Main/HomePage?action=login'
+        title='Přihlásit' rel='nofollow'>Přihlásit</a></span>
+    </td>
+   </tr>
+   <!--/PageFooterFmt-->
+   <tr>
+    <td id='sitesole' colspan='3'>
+     <span id='copyright' title='Copyright notice'>Informace zde
+        uveřejněné nejsou oficiálním sdělením/stanoviskem
+		<a href='http://www.vse.cz/' title='Vysoká škola ekonomická v Praze'>
+		Vysoké školy ekonomické v Praze</a>.
+        </span> <span id='sitepoweredby' title='Powered by PmWiki'>Powered by
+          <a href='http://www.pmwiki.org/wiki/PmWiki/PmWiki'
+           title='PmWiki Home'>PmWiki</a>
+         </span>
+    </td>
+   </tr>
+  </table>
+  <!-- vim: expandtab sw=1 ts=1 sts=1 :
+  -->
+ </body>
+</html>

@@ -109,7 +109,7 @@ public class AvailableCommands {
         if(gamePlan.getCurrentLocation().getName().equals("forest")){
             addCommand(catchComm);
         }
-        if (game.getLevel() == 8){
+        if (game.getLevel() == 8  && gamePlan.getCurrentLocation().getName().equals("cave entry")){
             addCommand(kill);
         }
         addCommand(quit);

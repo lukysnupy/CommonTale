@@ -87,23 +87,23 @@ public class GamePlan implements Subject{
      */
     private void createMap(){
         //Založí všechny lokace hry
-        cottage = new Location("A1","cottage",1,1);
+        cottage = new Location("A1","cottage",100,80);
         currentLocation = cottage;
         previousLocation = currentLocation;
-        forest1 = new Location("A2","forest",2,1);
-        coast = new Location("A3","coast",3,1);
-        sea1 = new Location("A4","sea",3,0);
-        sea2 = new Location("A5","sea",4,1);
-        crossroad = new Location("B1","crossroad",1,2);
-        forest2 = new Location("B2","forest",2,2);
-        forest3 = new Location("B3","forest",3,2);
-        forest4 = new Location("C1","forest",1,3);
-        bridge = new Location("C2","bridge",2,3);
-        underBridge = new Location("C3","under bridge",2,4);
-        inFrontOfStore = new Location("C4","in front of store",3,3);
-        store = new Location("C5","store",0,0);
-        forest5 = new Location("D1","forest",0,0);
-        caveEntry = new Location("F1","cave entry",0,0);
+        forest1 = new Location("A2","forest",100,165);
+        coast = new Location("A3","coast",100,250);
+        sea1 = new Location("A4","sea",30,290);
+        sea2 = new Location("A5","sea",70,330);
+        crossroad = new Location("B1","crossroad",170,80);
+        forest2 = new Location("B2","forest",170,165);
+        forest3 = new Location("B3","forest",170,250);
+        forest4 = new Location("C1","forest",240,80);
+        bridge = new Location("C2","bridge",215,165);
+        underBridge = new Location("C3","under bridge",240,180);
+        inFrontOfStore = new Location("C4","in front of store",240,250);
+        store = new Location("C5","store",215,250);
+        forest5 = new Location("D1","forest",300,250);
+        caveEntry = new Location("F1","cave entry",300,180);
         secretPlace = new Location("SP","secret place",0,0);
         
         //Přidá každé lokaci jejich sousední lokace
@@ -147,21 +147,29 @@ public class GamePlan implements Subject{
                 forest1.addWay("N", secretPlace);
                 secretPlacePosition = "north";
                 secretPlace.addWay("S", forest1);
+                secretPlace.setPosTop(30);
+                secretPlace.setPosLeft(165);
                 break;
             case 1:
                 forest3.addWay("E", secretPlace);
                 secretPlacePosition = "east";
                 secretPlace.addWay("W", forest3);
+                secretPlace.setPosTop(170);
+                secretPlace.setPosLeft(320);
                 break;
             case 2:
                 forest4.addWay("W", secretPlace);
                 secretPlacePosition = "west";
                 secretPlace.addWay("E", forest4);
+                secretPlace.setPosTop(240);
+                secretPlace.setPosLeft(10);
                 break;
             default:
                 forest5.addWay("S", secretPlace);
                 secretPlacePosition = "south";
                 secretPlace.addWay("N", forest5);
+                secretPlace.setPosTop(360);
+                secretPlace.setPosLeft(250);
                 break;
         }
     }

@@ -104,8 +104,8 @@ public class Location {
         this.waysOut = new HashMap<>();
         this.listOfItems = new HashMap<>();
 
-        this.posTop = posTop;
-        this.posLeft = posLeft;
+        this.setPosTop(posTop);
+        this.setPosLeft(posLeft);
     }
     
     /**
@@ -397,5 +397,13 @@ public class Location {
 
     public double getPosLeft() {
         return posLeft;
+    }
+
+    public void setPosTop(double posTop) {
+        this.posTop = posTop;
+    }
+
+    public void setPosLeft(double posLeft) {
+        this.posLeft = posLeft;
     }
 }

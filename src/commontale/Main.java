@@ -25,6 +25,7 @@ public class Main extends Application {
     private Map map;
     private TextField addCommand;
     private MyOwnMenuBar menuBar;
+    private Stage stage;
 
     public static void main(String[] args) {
         if(args.length == 0)
@@ -44,6 +45,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        this.stage = primaryStage;
+
         setGame(new Game());
         map = new Map(game);
         menuBar = new MyOwnMenuBar(game,this);
@@ -54,9 +57,8 @@ public class Main extends Application {
         centralText = new TextArea();
         getCentralText().setText(game.returnWelcome());
         getCentralText().setEditable(false);
+        getCentralText().setWrapText(true);
         borderPane.setCenter(getCentralText());
-
-        borderPane.setLeft(map);
 
         Label setCommand = new Label("Set command: ");
         setCommand.setFont(Font.font("Arial", FontWeight.BOLD,14));
@@ -71,6 +73,8 @@ public class Main extends Application {
 
                 getCentralText().appendText("\n" + userCommand + "\n");
                 getCentralText().appendText("\n" + gameAnswer + "\n");
+
+                map.update();
 
                 addCommand.setText("");
 
@@ -87,7 +91,7 @@ public class Main extends Application {
         bottomPanel.getChildren().addAll(setCommand, addCommand);
 
         borderPane.setBottom(bottomPanel);
-        borderPane.setLeft(map);
+        borderPane.setRight(map);
         borderPane.setTop(menuBar);
 
         Scene scene = new Scene(borderPane,1400,600);
@@ -106,5 +110,9 @@ public class Main extends Application {
 
     public void setGame(IGame game) {
         this.game = game;
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 }

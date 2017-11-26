@@ -4,15 +4,13 @@ import commontale.Main;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import logic.IGame;
 import util.Observer;
 
 public class Map extends AnchorPane implements Observer{
 
     public IGame game;
-    private Circle point;
+    private ImageView player;
 
     public Map(IGame game){
         this.game = game;
@@ -22,11 +20,12 @@ public class Map extends AnchorPane implements Observer{
 
     private void init(){
         ImageView imageView = new ImageView(new Image(Main.class.getResourceAsStream("/sources/map.png"),
-                200,200,false,true));
+                400,400,false,true));
 
-        point = new Circle(10, Paint.valueOf("red"));
+        player = new ImageView(new Image(Main.class.getResourceAsStream("/sources/player_small.png"),
+                25,25,false,true));
 
-        this.getChildren().addAll(imageView,point);
+        this.getChildren().addAll(imageView,player);
 
         update();
     }
@@ -40,7 +39,7 @@ public class Map extends AnchorPane implements Observer{
 
     @Override
     public void update() {
-        this.setTopAnchor(point, game.getGamePlan().getCurrentLocation().getPosTop());
-        this.setLeftAnchor(point, game.getGamePlan().getCurrentLocation().getPosLeft());
+        setTopAnchor(player, game.getGamePlan().getCurrentLocation().getPosTop());
+        setLeftAnchor(player, game.getGamePlan().getCurrentLocation().getPosLeft());
     }
 }
