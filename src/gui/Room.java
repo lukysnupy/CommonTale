@@ -116,7 +116,7 @@ public class Room extends AnchorPane implements Observer{
             }
         }
 
-        if(game.getGamePlan().getCurrentLocation().getName().substring(0,6).equals("forest")){
+        if(game.getGamePlan().getCurrentLocation().getName().equals("forest")){
             //ImageView itemView
         }
     }

@@ -252,7 +252,9 @@ public class Character {
     public void addSecretPlace(Character character, String location){
         if(character.equals(this)){
             answerSecretPlace = "You need to go " + location + " of the "
-                    + location + "ernmost place";
+                    + location + "ernmost place.." +
+                    "\n[THE SECRET PLACE WON'T SHOW IN EXITS/DIRECTIONS LIST, YOU NEED TO TYPE COMMAND TO COMMAND BOX" +
+                    " TO GET THERE!]";
         }
         else{
             answerSecretPlace = "You should probably go and ask " +

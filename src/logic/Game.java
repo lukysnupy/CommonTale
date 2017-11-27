@@ -176,6 +176,7 @@ public class Game implements IGame{
      * Vrací zpátky informaci o pokroku ve hře - level (hodnoty 1-8)
      * @return "level" hry značící pokrok v příběhu
      */
+    @Override
     public int getLevel(){
         return level;
     }

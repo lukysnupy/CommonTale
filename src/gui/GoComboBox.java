@@ -20,8 +20,12 @@ public class GoComboBox extends ComboBox implements Observer{
     @Override
     public void update() {
         data.remove(0,data.size());
-        for(String dir : game.getGamePlan().getCurrentLocation().getWaysOut().keySet())
+        for(String dir : game.getGamePlan().getCurrentLocation().getWaysOut().keySet()){
+            if(game.getLevel() < 4 && game.getGamePlan().getCurrentLocation().getWaysOut().get(dir).getName()
+                    .equals("secret place"))
+                continue;
             data.add(getFullDirectionName(dir));
+        }
     }
 
     public String getFullDirectionName(String dir) {

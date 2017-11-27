@@ -52,4 +52,6 @@ public interface IGame {
 
      public Bag getBag();
 
+     public int getLevel();
+
 }

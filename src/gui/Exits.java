@@ -33,9 +33,13 @@ public class Exits extends ListView implements Observer{
     @Override
     public void update() {
         exitsData.remove(0,exitsData.size());
-        Map<String,Location> waysOut = game.getGamePlan().getCurrentLocation().getWaysOut();
-        for (String direction : game.getGamePlan().getCurrentLocation().getWaysOut().keySet()) {
-            exitsData.add(direction + waysOut.get(direction).getName());
+        if(!game.getTalking()){
+            Map<String,Location> waysOut = game.getGamePlan().getCurrentLocation().getWaysOut();
+            for (String direction : game.getGamePlan().getCurrentLocation().getWaysOut().keySet()) {
+                if(game.getLevel() < 4 && waysOut.get(direction).getName().equals("secret place"))
+                    continue;
+                exitsData.add(direction + waysOut.get(direction).getName());
+            }
         }
     }
 
