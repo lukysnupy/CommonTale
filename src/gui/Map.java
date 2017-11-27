@@ -11,6 +11,7 @@ public class Map extends AnchorPane implements Observer{
 
     public IGame game;
     private ImageView player;
+    private ImageView bg;
 
     public Map(IGame game){
         this.game = game;
@@ -19,13 +20,13 @@ public class Map extends AnchorPane implements Observer{
     }
 
     private void init(){
-        ImageView imageView = new ImageView(new Image(Main.class.getResourceAsStream("/sources/map.png"),
+        bg = new ImageView(new Image(Main.class.getResourceAsStream("/sources/map.png"),
                 400,400,false,true));
 
         player = new ImageView(new Image(Main.class.getResourceAsStream("/sources/player_small.png"),
                 25,25,false,true));
 
-        this.getChildren().addAll(imageView,player);
+        this.getChildren().addAll(bg,player);
 
         update();
     }
@@ -41,5 +42,10 @@ public class Map extends AnchorPane implements Observer{
     public void update() {
         setTopAnchor(player, game.getGamePlan().getCurrentLocation().getPosTop());
         setLeftAnchor(player, game.getGamePlan().getCurrentLocation().getPosLeft());
+
+        if(game.getLevel() == 5)
+            bg.setImage(new Image(Main.class.getResourceAsStream("/sources/" +
+                    game.getGamePlan().getSecretPlaceDirection() + ".png"),400,400,
+                    false,true));
     }
 }

@@ -87,23 +87,23 @@ public class GamePlan implements Subject{
      */
     private void createMap(){
         //Založí všechny lokace hry
-        cottage = new Location("A1","cottage",100,80);
+        cottage = new Location("A1","cottage",123,85.5);
         currentLocation = cottage;
         previousLocation = currentLocation;
-        forest1 = new Location("A2","forest",100,165);
+        forest1 = new Location("A2","forest",100,170);
         coast = new Location("A3","coast",100,250);
         sea1 = new Location("A4","sea",30,290);
         sea2 = new Location("A5","sea",70,330);
-        crossroad = new Location("B1","crossroad",170,80);
-        forest2 = new Location("B2","forest",170,165);
-        forest3 = new Location("B3","forest",170,250);
-        forest4 = new Location("C1","forest",240,80);
-        bridge = new Location("C2","bridge",215,165);
-        underBridge = new Location("C3","under bridge",240,180);
+        crossroad = new Location("B1","crossroad",163,83);
+        forest2 = new Location("B2","forest",163,165);
+        forest3 = new Location("B3","forest",163,250);
+        forest4 = new Location("C1","forest",235,80);
+        bridge = new Location("C2","bridge",220,165);
+        underBridge = new Location("C3","under bridge",240,175);
         inFrontOfStore = new Location("C4","in front of store",240,250);
-        store = new Location("C5","store",215,250);
-        forest5 = new Location("D1","forest",300,250);
-        caveEntry = new Location("F1","cave entry",300,180);
+        store = new Location("C5","store",225,253);
+        forest5 = new Location("D1","forest",310,260);
+        caveEntry = new Location("F1","cave entry",323,210);
         secretPlace = new Location("SP","secret place",0,0);
         
         //Přidá každé lokaci jejich sousední lokace
@@ -154,7 +154,7 @@ public class GamePlan implements Subject{
                 forest3.addWay("E", secretPlace);
                 secretPlacePosition = "east";
                 secretPlace.addWay("W", forest3);
-                secretPlace.setPosTop(170);
+                secretPlace.setPosTop(163);
                 secretPlace.setPosLeft(320);
                 break;
             case 2:
@@ -516,5 +516,9 @@ public class GamePlan implements Subject{
         for(Observer item : listObserver){
             item.update();
         }
+    }
+
+    public String getSecretPlaceDirection(){
+        return secretPlacePosition;
     }
 }
