@@ -69,29 +69,52 @@ public class Room extends AnchorPane implements Observer{
         setTopAnchor(player, playerPos[0]);
         setLeftAnchor(player, playerPos[1]);
 
-        Set<String> itemSet = game.getGamePlan().getCurrentLocation().getItemSet();
         Collections.shuffle(itemsPositions);
+        Set<String> itemSet = game.getGamePlan().getCurrentLocation().getItemSet();
         int i = 0;
         for (String item : itemSet) {
-            ImageView itemView = new ImageView(new Image(Main.class.getResourceAsStream("/sources/"+item+".png"),
-                    25,25,false,true));
-            this.getChildren().add(itemView);
-            placedItems.put(item,itemView);
-            setTopAnchor(itemView, itemsPositions.get(i)[0]);
-            setLeftAnchor(itemView, itemsPositions.get(i)[1]);
-            itemView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    String userCommand = "grab " + item;
-                    String gameAnswer = game.compileCommand(userCommand);
+            ImageView itemView;
+            if(item.equals("chest")){
+                itemView = new ImageView(new Image(Main.class.getResourceAsStream("/sources/"+item+".png"),
+                        50,50,false,true));
+                this.getChildren().add(itemView);
+                placedItems.put(item,itemView);
+                setTopAnchor(itemView, 40.0);
+                setLeftAnchor(itemView, 30.0);
+                itemView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        String userCommand = "open chest";
+                        String gameAnswer = game.compileCommand(userCommand);
 
-                    centralText.appendText("\n" + userCommand + "\n");
-                    centralText.appendText("\n" + gameAnswer + "\n");
+                        centralText.appendText("\n" + userCommand + "\n");
+                        centralText.appendText("\n" + gameAnswer + "\n");
 
-                    game.getGamePlan().notifyObservers();
-                }
-            });
-            i++;
+                        game.getGamePlan().notifyObservers();
+                    }
+                });
+            }
+            else{
+                itemView = new ImageView(new Image(Main.class.getResourceAsStream("/sources/"+item+".png"),
+                        25,25,false,true));
+                this.getChildren().add(itemView);
+                placedItems.put(item,itemView);
+                setTopAnchor(itemView, itemsPositions.get(i)[0]);
+                setLeftAnchor(itemView, itemsPositions.get(i)[1]);
+                itemView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        String userCommand = "grab " + item;
+                        String gameAnswer = game.compileCommand(userCommand);
+
+                        centralText.appendText("\n" + userCommand + "\n");
+                        centralText.appendText("\n" + gameAnswer + "\n");
+
+                        game.getGamePlan().notifyObservers();
+                    }
+                });
+                i++;
+            }
         }
     }
 
