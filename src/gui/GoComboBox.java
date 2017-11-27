@@ -21,7 +21,7 @@ public class GoComboBox extends ComboBox implements Observer{
     public void update() {
         data.remove(0,data.size());
         for(String dir : game.getGamePlan().getCurrentLocation().getWaysOut().keySet())
-            data.add("go " + getFullDirectionName(dir));
+            data.add(getFullDirectionName(dir));
     }
 
     private String getFullDirectionName(String dir) {

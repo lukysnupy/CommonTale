@@ -68,12 +68,14 @@ public class Main extends Application {
         setGo.setFont(Font.font("Arial", FontWeight.BOLD,14));
 
         goComboBox.setValue("choose direction..");
-        /*goComboBox.setOnAction(new EventHandler<ActionEvent>() {
+        Button goButt = new Button();
+        goButt.setText("Go");
+        goButt.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
-                String userCommand = goComboBox.getText();
-                if(userCommand.split("[ \t]+")[0].equals("go")){
+                String dir = goComboBox.getValue().toString();
+                if(goComboBox.getValue() != null && !dir.isEmpty()){
+                    String userCommand = "go " + dir;
                     String gameAnswer = game.compileCommand(userCommand);
 
                     getCentralText().appendText("\n" + userCommand + "\n");
@@ -81,15 +83,10 @@ public class Main extends Application {
 
                     game.getGamePlan().notifyObservers();
                 }
-                else{
-                    getCentralText().appendText("\n\nIf you want to do something other from going somewhere just use " +
-                            "the other window for that..\n\n");
-                    addCommand.requestFocus();
-                }
-
-                goComboBox.setText("");
+                else
+                    getCentralText().appendText("\n\nYou need to choose direction!\n\n");
             }
-        });*/
+        });
 
         Label setCommand = new Label("Set command: ");
         setCommand.setFont(Font.font("Arial", FontWeight.BOLD,14));
@@ -126,7 +123,7 @@ public class Main extends Application {
 
         FlowPane bottomPanel = new FlowPane();
         bottomPanel.setAlignment(Pos.CENTER);
-        bottomPanel.getChildren().addAll(setGo, goComboBox, setCommand, addCommand);
+        bottomPanel.getChildren().addAll(setGo, goComboBox, goButt, setCommand, addCommand);
 
         VBox leftPanel = new VBox();
         leftPanel.setAlignment(Pos.CENTER);
