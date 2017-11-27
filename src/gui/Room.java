@@ -22,7 +22,7 @@ public class Room extends AnchorPane implements Observer{
     private List<double[]> itemsPositions = new ArrayList<>();
     private List<double[]> charactersPositions = new ArrayList<>();
     private Map<String,ImageView> placedItems = new HashMap<>();
-    private Character characterHere;
+    private ImageView characterHere;
     private TextArea centralText;
 
     public Room(IGame game, TextArea centralText){
@@ -41,11 +41,15 @@ public class Room extends AnchorPane implements Observer{
 
         this.getChildren().addAll(bg,player);
 
-        itemsPositions.add(new double[]{100,100});
-        itemsPositions.add(new double[]{110,150});
-        itemsPositions.add(new double[]{175,160});
-        itemsPositions.add(new double[]{140,120});
-        itemsPositions.add(new double[]{165,130});
+        itemsPositions.add(new double[]{85,245});
+        itemsPositions.add(new double[]{75,105});
+        itemsPositions.add(new double[]{160,70});
+        itemsPositions.add(new double[]{215,95});
+        itemsPositions.add(new double[]{155,195});
+
+        charactersPositions.add(new double[]{70,170});
+        charactersPositions.add(new double[]{210,30});
+        charactersPositions.add(new double[]{200,180});
 
         update();
     }
@@ -59,11 +63,13 @@ public class Room extends AnchorPane implements Observer{
 
     @Override
     public void update() {
-        //Remove all items
+        //Remove all items and characters
         for (String item : placedItems.keySet()) {
             this.getChildren().remove(placedItems.get(item));
         }
         placedItems.clear();
+        if(characterHere != null)
+            this.getChildren().remove(characterHere);
 
         //Reposition player
         double[] playerPos = getPlayerPosition();
@@ -119,6 +125,7 @@ public class Room extends AnchorPane implements Observer{
             }
         }
 
+        //Add tree if level 1 and location is forest
         if(game.getGamePlan().getCurrentLocation().getName().equals("forest") && game.getLevel() == 1){
             ImageView itemView = new ImageView(new Image(Main.class.getResourceAsStream("/sources/tree.png"),
                     64,64,false,true));
@@ -138,6 +145,66 @@ public class Room extends AnchorPane implements Observer{
                     game.getGamePlan().notifyObservers();
                 }
             });
+        }
+
+        //Add character, if there is one
+        if(game.getGamePlan().getCurrentLocation().getHasCharacter()){
+            String name = game.getGamePlan().getCurrentLocation().getCharacterHere();
+            ImageView character;
+            if(name.equals("dragon")){
+                character = new ImageView(new Image(Main.class.getResourceAsStream("/sources/dragon.png")));
+                character.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        String userCommand = "kill dragon";
+                        String gameAnswer = game.compileCommand(userCommand);
+
+                        centralText.appendText("\n" + userCommand + "\n");
+                        centralText.appendText("\n" + gameAnswer + "\n");
+
+                        game.getGamePlan().notifyObservers();
+                    }
+                });
+            }
+            else{
+                character = new ImageView(new Image(Main.class.getResourceAsStream("/sources/" + name
+                        + ".png")));
+                character.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        String userCommand = "ask " + name;
+                        String gameAnswer = game.compileCommand(userCommand);
+
+                        centralText.appendText("\n" + userCommand + "\n");
+                        centralText.appendText("\n" + gameAnswer + "\n");
+
+                        game.getGamePlan().notifyObservers();
+                    }
+                });
+            }
+            this.getChildren().add(character);
+            characterHere = character;
+            positionCharacter(name,character);
+        }
+        else
+            characterHere = null;
+    }
+
+    private void positionCharacter(String name, ImageView character) {
+        switch(name){
+            case "shopgirl":
+                setTopAnchor(character, 5.0);
+                setLeftAnchor(character,125.0);
+                break;
+            case "dragon":
+                setTopAnchor(character, 110.0);
+                setLeftAnchor(character, 20.0);
+                break;
+            default:
+                Collections.shuffle(charactersPositions);
+                setTopAnchor(character,charactersPositions.get(0)[0]);
+                setLeftAnchor(character,charactersPositions.get(0)[1]);
+                break;
         }
     }
 

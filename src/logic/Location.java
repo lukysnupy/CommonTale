@@ -421,4 +421,8 @@ public class Location {
     public Set<String> getItemSet(){
         return listOfItems.keySet();
     }
+
+    public String getCharacterHere(){
+        return characterHere.getName();
+    }
 }
