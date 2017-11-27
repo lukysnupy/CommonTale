@@ -59,7 +59,7 @@ public class Main extends Application {
         getCentralText().setWrapText(true);
 
         map = new Map(game);
-        room = new Room(game);
+        room = new Room(game,centralText);
         exits = new Exits(game);
         bagContent = new BagContent(game.getBag());
         goComboBox = new GoComboBox(game);
@@ -192,7 +192,7 @@ public class Main extends Application {
         borderPane.setRight(rightPanel);
         borderPane.setTop(menuBar);
 
-        Scene scene = new Scene(borderPane,1400,780);
+        Scene scene = new Scene(borderPane,1400,720);
 
         primaryStage.setTitle("Welcome to the common world!");
         primaryStage.setScene(scene);

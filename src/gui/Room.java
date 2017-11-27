@@ -1,31 +1,52 @@
 package gui;
 
 import commontale.Main;
+import javafx.event.EventHandler;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import logic.Character;
 import logic.IGame;
+import logic.Item;
 import util.Observer;
+
+import java.util.*;
+import java.util.Map;
 
 public class Room extends AnchorPane implements Observer{
 
     public IGame game;
+    private ImageView bg;
     private ImageView player;
+    private List<double[]> itemsPositions = new ArrayList<>();
+    private List<double[]> charactersPositions = new ArrayList<>();
+    private Map<String,ImageView> placedItems = new HashMap<>();
+    private Character characterHere;
+    private TextArea centralText;
 
-    public Room(IGame game){
+    public Room(IGame game, TextArea centralText){
         this.game = game;
+        this.centralText = centralText;
         game.getGamePlan().registerObserver(this);
         init();
     }
 
     private void init(){
-        ImageView imageView = new ImageView(new Image(Main.class.getResourceAsStream("/sources/room_preview.png"),
+        ImageView bg = new ImageView(new Image(Main.class.getResourceAsStream("/sources/room_preview.png"),
                 300,300,false,true));
 
         player = new ImageView(new Image(Main.class.getResourceAsStream("/sources/player.png"),
                 50,50,false,true));
 
-        this.getChildren().addAll(imageView,player);
+        this.getChildren().addAll(bg,player);
+
+        itemsPositions.add(new double[]{100,100});
+        itemsPositions.add(new double[]{110,150});
+        itemsPositions.add(new double[]{175,160});
+        itemsPositions.add(new double[]{140,120});
+        itemsPositions.add(new double[]{165,130});
 
         update();
     }
@@ -39,9 +60,39 @@ public class Room extends AnchorPane implements Observer{
 
     @Override
     public void update() {
+        for (String item : placedItems.keySet()) {
+            this.getChildren().remove(placedItems.get(item));
+        }
+        placedItems.clear();
+
         double[] playerPos = getPlayerPosition();
         setTopAnchor(player, playerPos[0]);
         setLeftAnchor(player, playerPos[1]);
+
+        Set<String> itemSet = game.getGamePlan().getCurrentLocation().getItemSet();
+        Collections.shuffle(itemsPositions);
+        int i = 0;
+        for (String item : itemSet) {
+            ImageView itemView = new ImageView(new Image(Main.class.getResourceAsStream("/sources/"+item+".png"),
+                    25,25,false,true));
+            this.getChildren().add(itemView);
+            placedItems.put(item,itemView);
+            setTopAnchor(itemView, itemsPositions.get(i)[0]);
+            setLeftAnchor(itemView, itemsPositions.get(i)[1]);
+            itemView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    String userCommand = "grab " + item;
+                    String gameAnswer = game.compileCommand(userCommand);
+
+                    centralText.appendText("\n" + userCommand + "\n");
+                    centralText.appendText("\n" + gameAnswer + "\n");
+
+                    game.getGamePlan().notifyObservers();
+                }
+            });
+            i++;
+        }
     }
 
     private double[] getPlayerPosition(){

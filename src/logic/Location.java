@@ -1,8 +1,6 @@
 package logic;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Třída Location představuje herní lokace ("místnosti"), mezi kterými hráč 
@@ -418,5 +416,9 @@ public class Location {
 
     public Map<String,Location> getWaysOut(){
         return waysOut;
+    }
+
+    public Set<String> getItemSet(){
+        return listOfItems.keySet();
     }
 }
