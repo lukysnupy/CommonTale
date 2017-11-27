@@ -147,29 +147,29 @@ public class GamePlan implements Subject{
                 forest1.addWay("N", secretPlace);
                 secretPlacePosition = "north";
                 secretPlace.addWay("S", forest1);
-                secretPlace.setPosTop(30);
-                secretPlace.setPosLeft(165);
+                secretPlace.setPosTop(35);
+                secretPlace.setPosLeft(162);
                 break;
             case 1:
                 forest3.addWay("E", secretPlace);
                 secretPlacePosition = "east";
                 secretPlace.addWay("W", forest3);
-                secretPlace.setPosTop(163);
-                secretPlace.setPosLeft(320);
+                secretPlace.setPosTop(170);
+                secretPlace.setPosLeft(325);
                 break;
             case 2:
                 forest4.addWay("W", secretPlace);
                 secretPlacePosition = "west";
                 secretPlace.addWay("E", forest4);
-                secretPlace.setPosTop(240);
-                secretPlace.setPosLeft(10);
+                secretPlace.setPosTop(235);
+                secretPlace.setPosLeft(17);
                 break;
             default:
                 forest5.addWay("S", secretPlace);
                 secretPlacePosition = "south";
                 secretPlace.addWay("N", forest5);
-                secretPlace.setPosTop(360);
-                secretPlace.setPosLeft(250);
+                secretPlace.setPosTop(365);
+                secretPlace.setPosLeft(252);
                 break;
         }
     }
