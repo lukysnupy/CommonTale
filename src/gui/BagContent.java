@@ -84,6 +84,7 @@ public class BagContent extends ListView implements Observer{
                 icon.setImage(new Image(Main.class.getResourceAsStream("/sources/"+item+".png"),
                         25,25,false,true));
                 setGraphic(hBox);
+
             }
         }
     }

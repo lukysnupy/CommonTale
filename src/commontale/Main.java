@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -51,18 +52,18 @@ public class Main extends Application {
         this.stage = primaryStage;
 
         setGame(new Game());
-        map = new Map(game);
-        room = new Room(game);
-        exits = new Exits(game);
-        goComboBox = new GoComboBox(game);
-        menuBar = new MyOwnMenuBar(game,this);
-        BorderPane borderPane = new BorderPane();
 
         centralText = new TextArea();
         getCentralText().setText(game.returnWelcome());
         getCentralText().setEditable(false);
         getCentralText().setWrapText(true);
-        borderPane.setCenter(getCentralText());
+
+        map = new Map(game);
+        room = new Room(game);
+        exits = new Exits(game);
+        bagContent = new BagContent(game.getBag());
+        goComboBox = new GoComboBox(game);
+        menuBar = new MyOwnMenuBar(game,this);
 
         Label setGo = new Label("Set where you want to go: ");
         setGo.setFont(Font.font("Arial", FontWeight.BOLD,14));
@@ -147,8 +148,21 @@ public class Main extends Application {
         Label bagLabel = new Label("Bag: ");
         bagLabel.setFont(Font.font("Sans", FontWeight.BOLD,14));
         bagLabel.setPadding(new Insets(2,2,2,5));
-        bagContent = new BagContent(game.getBag());
         bagContent.setPrefHeight(68);
+        bagContent.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(event.getClickCount() == 2){
+                    String userCommand = "throw " + bagContent.getSelectionModel().getSelectedItem().toString();
+                    String gameAnswer = game.compileCommand(userCommand);
+
+                    getCentralText().appendText("\n" + userCommand + "\n");
+                    getCentralText().appendText("\n" + gameAnswer + "\n");
+
+                    game.getGamePlan().notifyObservers();
+                }
+            }
+        });
 
         Label roomLabel = new Label("Room: ");
         roomLabel.setFont(Font.font("Sans", FontWeight.BOLD,14));
@@ -156,7 +170,8 @@ public class Main extends Application {
 
         rightPanel.getChildren().addAll(bagLabel, bagContent, roomLabel, room);
 
-
+        BorderPane borderPane = new BorderPane();
+        borderPane.setCenter(getCentralText());
         borderPane.setBottom(bottomPanel);
         borderPane.setLeft(leftPanel);
         borderPane.setRight(rightPanel);
