@@ -138,6 +138,21 @@ public class Main extends Application {
         exitsLabel.setFont(Font.font("Sans", FontWeight.BOLD,14));
         exitsLabel.setPadding(new Insets(20,2,2,5));
         exits.setPrefHeight(115);
+        exits.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(event.getClickCount() == 2){
+                    String userCommand = "go " + goComboBox.getFullDirectionName(exits.getSelectionModel()
+                            .getSelectedItem().toString().substring(0,1));
+                    String gameAnswer = game.compileCommand(userCommand);
+
+                    getCentralText().appendText("\n" + userCommand + "\n");
+                    getCentralText().appendText("\n" + gameAnswer + "\n");
+
+                    game.getGamePlan().notifyObservers();
+                }
+            }
+        });
 
         leftPanel.getChildren().addAll(mapLabel, map, exitsLabel, exits);
 

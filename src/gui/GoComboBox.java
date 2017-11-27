@@ -24,7 +24,7 @@ public class GoComboBox extends ComboBox implements Observer{
             data.add(getFullDirectionName(dir));
     }
 
-    private String getFullDirectionName(String dir) {
+    public String getFullDirectionName(String dir) {
         switch(dir){
             case "N":
                 return "north";
