@@ -231,4 +231,8 @@ public class Main extends Application {
     public GoComboBox getGoComboBox(){
         return goComboBox;
     }
+
+    public TextField getCommandBox(){
+        return addCommand;
+    }
 }

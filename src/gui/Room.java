@@ -115,6 +115,10 @@ public class Room extends AnchorPane implements Observer{
                 i++;
             }
         }
+
+        if(game.getGamePlan().getCurrentLocation().getName().substring(0,6).equals("forest")){
+            //ImageView itemView
+        }
     }
 
     private double[] getPlayerPosition(){
