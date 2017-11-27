@@ -415,4 +415,8 @@ public class Location {
     public void setPosLeft(double posLeft) {
         this.posLeft = posLeft;
     }
+
+    public Map<String,Location> getWaysOut(){
+        return waysOut;
+    }
 }

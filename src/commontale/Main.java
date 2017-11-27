@@ -1,9 +1,6 @@
 package commontale;
 
-import gui.BagContent;
-import gui.Map;
-import gui.MyOwnMenuBar;
-import gui.Room;
+import gui.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +26,8 @@ public class Main extends Application {
     private IGame game;
     private Map map;
     private Room room;
+    private BagContent bagContent;
+    private Exits exits;
     private TextField addGo;
     private TextField addCommand;
     private MyOwnMenuBar menuBar;
@@ -57,6 +56,7 @@ public class Main extends Application {
         setGame(new Game());
         map = new Map(game);
         room = new Room(game);
+        exits = new Exits(game);
         menuBar = new MyOwnMenuBar(game,this);
         BorderPane borderPane = new BorderPane();
 
@@ -81,8 +81,7 @@ public class Main extends Application {
                     getCentralText().appendText("\n" + userCommand + "\n");
                     getCentralText().appendText("\n" + gameAnswer + "\n");
 
-                    map.update();
-                    room.update();
+                    game.getGamePlan().notifyObservers();
                 }
                 else{
                     getCentralText().appendText("\n\nIf you want to do something other from going somewhere just use " +
@@ -109,8 +108,7 @@ public class Main extends Application {
                 getCentralText().appendText("\n" + userCommand + "\n");
                 getCentralText().appendText("\n" + gameAnswer + "\n");
 
-                map.update();
-                room.update();
+                game.getGamePlan().notifyObservers();
 
                 addCommand.setText("");
 
@@ -142,23 +140,35 @@ public class Main extends Application {
 
         VBox leftPanel = new VBox();
         leftPanel.setAlignment(Pos.CENTER);
+
         map.setPadding(new Insets(0,0,15,0));
+
         Label roomLabel = new Label("Room: ");
         roomLabel.setFont(Font.font("Sans", FontWeight.BOLD,14));
         roomLabel.setPadding(new Insets(2,2,2,5));
         HBox roomBox = new HBox();
         roomBox.setAlignment(Pos.CENTER);
         roomBox.getChildren().addAll(roomLabel, room);
+
         leftPanel.getChildren().addAll(map, roomBox);
+
 
         VBox rightPanel = new VBox();
         rightPanel.setAlignment(Pos.CENTER);
+
         Label bagLabel = new Label("Bag: ");
         bagLabel.setFont(Font.font("Sans", FontWeight.BOLD,14));
         bagLabel.setPadding(new Insets(2,2,2,5));
-        BagContent bagContent = new BagContent(game.getBag());
+        bagContent = new BagContent(game.getBag());
         bagContent.setPrefHeight(68);
-        rightPanel.getChildren().addAll(bagLabel, bagContent);
+
+        Label exitsLabel = new Label("Exits: ");
+        exitsLabel.setFont(Font.font("Sans", FontWeight.BOLD,14));
+        exitsLabel.setPadding(new Insets(20,2,2,5));
+        exits.setPrefHeight(115);
+
+        rightPanel.getChildren().addAll(bagLabel, bagContent, exitsLabel, exits);
+
 
         borderPane.setBottom(bottomPanel);
         borderPane.setLeft(leftPanel);
@@ -189,5 +199,13 @@ public class Main extends Application {
 
     public Room getRoom() {
         return room;
+    }
+
+    public BagContent getBagContent(){
+        return bagContent;
+    }
+
+    public Exits getExits(){
+        return exits;
     }
 }

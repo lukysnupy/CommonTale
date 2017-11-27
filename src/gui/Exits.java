@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -13,37 +14,34 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
-import logic.Bag;
+import logic.IGame;
+import logic.Location;
 import util.Observer;
-import javafx.scene.control.*;
+import java.util.Map;
 
-import java.util.Set;
+public class Exits extends ListView implements Observer{
 
-public class BagContent extends ListView implements Observer{
+    private IGame game;
+    private ObservableList<String> exitsData;
 
-    private Bag subject;
-    private ObservableList<String> bagData;
-
-    public BagContent(Bag subject){
-        this.subject = subject;
-        subject.registerObserver(this);
+    public Exits(IGame game){
+        this.game = game;
+        game.getGamePlan().registerObserver(this);
         init();
     }
 
     @Override
     public void update() {
-        bagData.remove(0,bagData.size());
-        Set<String> bagCont = subject.getBagContent();
-        for (String item : bagCont) {
-            if(item.equals("key1"))
-                item = "key";
-            bagData.add(item);
+        exitsData.remove(0,exitsData.size());
+        Map<String,Location> waysOut = game.getGamePlan().getCurrentLocation().getWaysOut();
+        for (String direction : game.getGamePlan().getCurrentLocation().getWaysOut().keySet()) {
+            exitsData.add(direction + waysOut.get(direction).getName());
         }
     }
 
     private void init(){
-        bagData = FXCollections.observableArrayList();
-        setItems(bagData);
+        exitsData = FXCollections.observableArrayList();
+        setItems(exitsData);
         setCellFactory(new Callback<ListView, ListCell>() {
             @Override
             public ListCell call(ListView param) {
@@ -53,10 +51,10 @@ public class BagContent extends ListView implements Observer{
         update();
     }
 
-    public void newGame(Bag bag){
-        bag.removeObserver(this);
-        subject = bag;
-        bag.registerObserver(this);
+    public void newGame(IGame newGame){
+        game.getGamePlan().removeObserver(this);
+        game = newGame;
+        game.getGamePlan().registerObserver(this);
         update();
     }
 
@@ -80,9 +78,9 @@ public class BagContent extends ListView implements Observer{
             if(empty)
                 setGraphic(null);
             else{
-                text.setText(item);
-                icon.setImage(new Image(Main.class.getResourceAsStream("/sources/"+item+".png"),
-                        25,25,false,true));
+                text.setText(item.substring(1));
+                icon.setImage(new Image(Main.class.getResourceAsStream("/sources/"+item.substring(0,1)+".png"),
+                        20,20,false,true));
                 setGraphic(hBox);
             }
         }
