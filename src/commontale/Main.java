@@ -141,16 +141,17 @@ public class Main extends Application {
         VBox leftPanel = new VBox();
         leftPanel.setAlignment(Pos.CENTER);
 
+        Label mapLabel = new Label("Map: ");
+        mapLabel.setFont(Font.font("Sans", FontWeight.BOLD,14));
+        mapLabel.setPadding(new Insets(2,2,2,5));
         map.setPadding(new Insets(0,0,15,0));
 
-        Label roomLabel = new Label("Room: ");
-        roomLabel.setFont(Font.font("Sans", FontWeight.BOLD,14));
-        roomLabel.setPadding(new Insets(2,2,2,5));
-        HBox roomBox = new HBox();
-        roomBox.setAlignment(Pos.CENTER);
-        roomBox.getChildren().addAll(roomLabel, room);
+        Label exitsLabel = new Label("Exits: ");
+        exitsLabel.setFont(Font.font("Sans", FontWeight.BOLD,14));
+        exitsLabel.setPadding(new Insets(20,2,2,5));
+        exits.setPrefHeight(115);
 
-        leftPanel.getChildren().addAll(map, roomBox);
+        leftPanel.getChildren().addAll(mapLabel, map, exitsLabel, exits);
 
 
         VBox rightPanel = new VBox();
@@ -162,12 +163,11 @@ public class Main extends Application {
         bagContent = new BagContent(game.getBag());
         bagContent.setPrefHeight(68);
 
-        Label exitsLabel = new Label("Exits: ");
-        exitsLabel.setFont(Font.font("Sans", FontWeight.BOLD,14));
-        exitsLabel.setPadding(new Insets(20,2,2,5));
-        exits.setPrefHeight(115);
+        Label roomLabel = new Label("Room: ");
+        roomLabel.setFont(Font.font("Sans", FontWeight.BOLD,14));
+        roomLabel.setPadding(new Insets(20,2,2,5));
 
-        rightPanel.getChildren().addAll(bagLabel, bagContent, exitsLabel, exits);
+        rightPanel.getChildren().addAll(bagLabel, bagContent, roomLabel, room);
 
 
         borderPane.setBottom(bottomPanel);
