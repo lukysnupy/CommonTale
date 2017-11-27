@@ -144,8 +144,8 @@ public class Main extends Application {
         leftPanel.setAlignment(Pos.CENTER);
         map.setPadding(new Insets(0,0,15,0));
         Label roomLabel = new Label("Room: ");
-        setCommand.setFont(Font.font("Arial", FontWeight.BOLD,14));
-        setCommand.setPadding(new Insets(2,2,2,5));
+        roomLabel.setFont(Font.font("Sans", FontWeight.BOLD,14));
+        roomLabel.setPadding(new Insets(2,2,2,5));
         HBox roomBox = new HBox();
         roomBox.setAlignment(Pos.CENTER);
         roomBox.getChildren().addAll(roomLabel, room);
@@ -154,9 +154,10 @@ public class Main extends Application {
         VBox rightPanel = new VBox();
         rightPanel.setAlignment(Pos.CENTER);
         Label bagLabel = new Label("Bag: ");
-        bagLabel.setFont(Font.font("Arial", FontWeight.BOLD,14));
+        bagLabel.setFont(Font.font("Sans", FontWeight.BOLD,14));
         bagLabel.setPadding(new Insets(2,2,2,5));
         BagContent bagContent = new BagContent(game.getBag());
+        bagContent.setPrefHeight(68);
         rightPanel.getChildren().addAll(bagLabel, bagContent);
 
         borderPane.setBottom(bottomPanel);
