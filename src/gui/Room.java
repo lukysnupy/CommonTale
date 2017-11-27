@@ -59,15 +59,18 @@ public class Room extends AnchorPane implements Observer{
 
     @Override
     public void update() {
+        //Remove all items
         for (String item : placedItems.keySet()) {
             this.getChildren().remove(placedItems.get(item));
         }
         placedItems.clear();
 
+        //Reposition player
         double[] playerPos = getPlayerPosition();
         setTopAnchor(player, playerPos[0]);
         setLeftAnchor(player, playerPos[1]);
 
+        //Position items in current location
         Collections.shuffle(itemsPositions);
         Set<String> itemSet = game.getGamePlan().getCurrentLocation().getItemSet();
         int i = 0;
@@ -116,8 +119,25 @@ public class Room extends AnchorPane implements Observer{
             }
         }
 
-        if(game.getGamePlan().getCurrentLocation().getName().equals("forest")){
-            //ImageView itemView
+        if(game.getGamePlan().getCurrentLocation().getName().equals("forest") && game.getLevel() == 1){
+            ImageView itemView = new ImageView(new Image(Main.class.getResourceAsStream("/sources/tree.png"),
+                    64,64,false,true));
+            this.getChildren().add(itemView);
+            placedItems.put("tree",itemView);
+            setTopAnchor(itemView, 118.0);
+            setLeftAnchor(itemView, 118.0);
+            itemView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    String userCommand = "grab wood";
+                    String gameAnswer = game.compileCommand(userCommand);
+
+                    centralText.appendText("\n" + userCommand + "\n");
+                    centralText.appendText("\n" + gameAnswer + "\n");
+
+                    game.getGamePlan().notifyObservers();
+                }
+            });
         }
     }
 
