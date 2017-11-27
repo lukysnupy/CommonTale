@@ -65,33 +65,8 @@ public class Main extends Application {
         goComboBox = new GoComboBox(game);
         menuBar = new MyOwnMenuBar(game,this);
 
-        Label setGo = new Label("Set where you want to go: ");
-        setGo.setFont(Font.font("Arial", FontWeight.BOLD,14));
-
-        goComboBox.setValue("choose direction..");
-        Button goButt = new Button();
-        goButt.setText("Go");
-        goButt.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                String dir = goComboBox.getValue().toString();
-                if(goComboBox.getValue() != null && !dir.isEmpty()){
-                    String userCommand = "go " + dir;
-                    String gameAnswer = game.compileCommand(userCommand);
-
-                    getCentralText().appendText("\n" + userCommand + "\n");
-                    getCentralText().appendText("\n" + gameAnswer + "\n");
-
-                    game.getGamePlan().notifyObservers();
-                }
-                else
-                    getCentralText().appendText("\n\nYou need to choose direction!\n\n");
-            }
-        });
-
         Label setCommand = new Label("Set command: ");
         setCommand.setFont(Font.font("Arial", FontWeight.BOLD,14));
-        setCommand.setPadding(new Insets(0,0,0,70));
 
         addCommand = new TextField("ask grandma");
         addCommand.setOnAction(new EventHandler<ActionEvent>() {
@@ -124,7 +99,7 @@ public class Main extends Application {
 
         FlowPane bottomPanel = new FlowPane();
         bottomPanel.setAlignment(Pos.CENTER);
-        bottomPanel.getChildren().addAll(setGo, goComboBox, goButt, setCommand, addCommand);
+        bottomPanel.getChildren().addAll(setCommand, addCommand);
 
         VBox leftPanel = new VBox();
         leftPanel.setAlignment(Pos.CENTER);
@@ -154,7 +129,34 @@ public class Main extends Application {
             }
         });
 
-        leftPanel.getChildren().addAll(mapLabel, map, exitsLabel, exits);
+        HBox goBox = new HBox();
+        goBox.setPadding(new Insets(15,5,5,5));
+        goBox.setAlignment(Pos.CENTER);
+
+        Label setGo = new Label("Set direction: ");
+        setGo.setFont(Font.font("Arial", FontWeight.BOLD,14));
+        setGo.setAlignment(Pos.CENTER);
+
+        goComboBox.setValue("choose direction..");
+        Button goButt = new Button();
+        goButt.setText("Go");
+        goButt.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String dir = goComboBox.getValue().toString();
+                String userCommand = "go " + dir;
+                String gameAnswer = game.compileCommand(userCommand);
+
+                getCentralText().appendText("\n" + userCommand + "\n");
+                getCentralText().appendText("\n" + gameAnswer + "\n");
+
+                game.getGamePlan().notifyObservers();
+            }
+        });
+
+        goBox.getChildren().addAll(setGo, goComboBox, goButt);
+
+        leftPanel.getChildren().addAll(mapLabel, map, exitsLabel, exits, goBox);
 
 
         VBox rightPanel = new VBox();

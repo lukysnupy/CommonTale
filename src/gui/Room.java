@@ -9,7 +9,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import logic.Character;
 import logic.IGame;
-import logic.Item;
 import util.Observer;
 
 import java.util.*;
