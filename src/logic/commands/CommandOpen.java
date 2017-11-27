@@ -60,7 +60,9 @@ public class CommandOpen implements ICommand{
         
         //Zkontrolujeme první klíč
         if(bag.returnItem("key") != null){
-            if(chest.openChest(bag.getItem("key"))){
+            if(chest.openChest(bag.returnItem("key"))){
+                bag.getItem("key");
+                bag.notifyObservers();
                 Collection<Item> chestContent = new ArrayList<>();
                 chestContent = chest.returnChestContent();
                 for(Item item: chestContent){
@@ -72,7 +74,9 @@ public class CommandOpen implements ICommand{
         }
         //A druhý 
         if(bag.returnItem("key1") != null){
-            if(chest.openChest(bag.getItem("key1"))){
+            if(chest.openChest(bag.returnItem("key1"))){
+                bag.getItem("key1");
+                bag.notifyObservers();
                 Collection<Item> chestContent = new ArrayList<>();
                 chestContent = chest.returnChestContent();
                 for(Item item: chestContent){

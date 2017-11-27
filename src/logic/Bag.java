@@ -5,8 +5,10 @@
  */
 package logic;
 
-import java.util.HashMap;
-import java.util.Map;
+import util.Observer;
+import util.Subject;
+
+import java.util.*;
 
 /**
  * Třída Bag představuje batoh, který nosí hráč u sebe a dává do něj předměty.
@@ -16,10 +18,12 @@ import java.util.Map;
  * @author  Lukas Ruzicka
  * @version LS 2016/2017
  */
-public class Bag {
+public class Bag implements Subject{
     private boolean locked;
     private final Map<String,Item> bagContent;
     private final GamePlan gamePlan;
+
+    private List<Observer> listObserver = new ArrayList<>();
     
     /**
      * Konstuktror třídy Batoh
@@ -45,6 +49,7 @@ public class Bag {
             Item item = gamePlan.getCurrentLocation().grabItem(name);
             bagContent.put(item.getName(), item);
             item.setLocation(null);
+            notifyObservers();
             return item.getName() + " added to bag!";
         }
         else{
@@ -65,6 +70,7 @@ public class Bag {
         if(bagContent.size() < 2){
             bagContent.put(item.getName(), item);
             item.setLocation(null);
+            notifyObservers();
             return item.getName() + " added to bag!";
         }
         else{
@@ -81,6 +87,7 @@ public class Bag {
     public String throwItem(String item){
         if (bagContent.containsKey(item)){
             gamePlan.getCurrentLocation().addItem(bagContent.remove(item));
+            notifyObservers();
             return item + " was thrown";
         }
         else{
@@ -112,12 +119,17 @@ public class Bag {
         }
         return items;
     }
+
+    public Set<String> getBagContent(){
+        return bagContent.keySet();
+    }
     
     /**
      * Odemkne batoh - v příbehu značí moment, kdy hráč batoh dostane
      */
     public void unlockBag(){
         locked = false;
+        //notifyObservers();
     }
     
     /**
@@ -180,5 +192,22 @@ public class Bag {
      */
     public boolean containsItem(String name){
         return bagContent.containsKey(name);
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        listObserver.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        listObserver.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(Observer item : listObserver){
+            item.update();
+        }
     }
 }

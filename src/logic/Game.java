@@ -207,4 +207,9 @@ public class Game implements IGame{
     public boolean getTalking(){
         return talking;
     }
+
+    @Override
+    public Bag getBag(){
+        return bag;
+    }
 }

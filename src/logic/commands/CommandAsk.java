@@ -67,6 +67,7 @@ public class CommandAsk implements ICommand{
                 }
                 else if(bag.getItem("wood") != null){
                     game.increaseLevel();
+                    bag.notifyObservers();
                     return "\"Great! Thank you for wood and here's your bag. "
                             + "Don't forget, that only two things at once can "
                             + "fit in that bag. Good luck! And be careful of "
@@ -125,6 +126,7 @@ public class CommandAsk implements ICommand{
         //Omezení pro bezdomovce
         if(currentChar.getName().equals("homeless")){
             if(bag.getItem("rum") != null){
+                bag.notifyObservers();
                 game.setTalking(false);
                 return "You give a rum to homeless. He got drunk and totter "
                         + "away \n";
@@ -132,6 +134,7 @@ public class CommandAsk implements ICommand{
             else{
                 game.setTalking(false);
                 bag.removeItems();
+                bag.notifyObservers();
                 return "You have been robbed by homeless! \n" 
                         + gamePlan.getCurrentLocation().message();
             }
@@ -153,11 +156,17 @@ public class CommandAsk implements ICommand{
                 return "\"" + currentChar.returnDontWantItem() + "\"";
             }
             if(currentChar.neededItem(item)){
-                if(bag.getItem(item) != null && bag.bagContentCount() < 2){
+                if(bag.bagContentCount() >= 2){
+                    game.setTalking(false);
+                    return "You don't have enough space in bag, throw something"
+                            + " away first";
+                }
+                else if(bag.getItem(item) != null && bag.bagContentCount() < 2){
                     String message = "";
                     message += "\"" + currentChar.obtainItem(item) +"\""+ "\n" +
                             bag.addItem(gamePlan.getUnpositionedItem(
                             currentChar.returnExchangedItem()));
+                    bag.notifyObservers();
                     game.setTalking(false);
                     if(currentChar.returnExchangedItem().equals("weed")){
                         game.setLevel(6);
@@ -167,11 +176,6 @@ public class CommandAsk implements ICommand{
                     }
                     return message;
                     }
-                else if(bag.bagContentCount() >= 2){
-                    game.setTalking(false);
-                    return "You don't have enough space in bag, throw something"
-                            + " away first";
-                }
                 else{
                     game.setTalking(false);
                     return "You don't have a thing like that in your bag";
@@ -213,6 +217,7 @@ public class CommandAsk implements ICommand{
                             + "me";
                     }
                     message += "\n" + bag.addItem(currentChar.giveItem());
+                    bag.notifyObservers();
                 }
                 game.setTalking(false);
                 return message;

@@ -1,9 +1,12 @@
 package commontale;
 
+import gui.BagContent;
 import gui.Map;
 import gui.MyOwnMenuBar;
 import gui.Room;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -95,7 +98,7 @@ public class Main extends Application {
         setCommand.setFont(Font.font("Arial", FontWeight.BOLD,14));
         setCommand.setPadding(new Insets(0,0,0,70));
 
-        addCommand = new TextField("");
+        addCommand = new TextField("ask grandma");
         addCommand.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -148,8 +151,17 @@ public class Main extends Application {
         roomBox.getChildren().addAll(roomLabel, room);
         leftPanel.getChildren().addAll(map, roomBox);
 
+        VBox rightPanel = new VBox();
+        rightPanel.setAlignment(Pos.CENTER);
+        Label bagLabel = new Label("Bag: ");
+        bagLabel.setFont(Font.font("Arial", FontWeight.BOLD,14));
+        bagLabel.setPadding(new Insets(2,2,2,5));
+        BagContent bagContent = new BagContent(game.getBag());
+        rightPanel.getChildren().addAll(bagLabel, bagContent);
+
         borderPane.setBottom(bottomPanel);
         borderPane.setLeft(leftPanel);
+        borderPane.setRight(rightPanel);
         borderPane.setTop(menuBar);
 
         Scene scene = new Scene(borderPane,1400,780);
@@ -157,7 +169,7 @@ public class Main extends Application {
         primaryStage.setTitle("Welcome to the common world!");
         primaryStage.setScene(scene);
         primaryStage.show();
-        addGo.requestFocus();
+        addCommand.requestFocus();
     }
 
     public Map getMap(){ return map;}

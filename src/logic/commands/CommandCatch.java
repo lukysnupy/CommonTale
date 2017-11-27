@@ -61,6 +61,7 @@ public class CommandCatch implements ICommand{
         }
         
         gamePlan.getCurrentLocation().addItem(bag.getItem("can"));
+        bag.notifyObservers();
         return "Ohh, you've missed..";
     }
 

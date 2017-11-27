@@ -59,6 +59,7 @@ public class CommandGrab implements ICommand{
                 gamePlan.getCurrentLocation().getName().equals("secret place")){
             if(bag.getItem("scissors") != null){
                 game.setLevel(6);
+                bag.notifyObservers();
                 return bag.addItem(gamePlan.getCurrentLocation().
                         grabItem("weed"));
             }
@@ -82,7 +83,7 @@ public class CommandGrab implements ICommand{
         if(item.equals("sword")){
             game.setLevel(8);
         }
-        
+
         return bag.addItem(item);
     }
 

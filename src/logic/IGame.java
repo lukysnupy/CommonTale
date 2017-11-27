@@ -50,4 +50,6 @@ public interface IGame {
 
      public boolean getTalking();
 
+     public Bag getBag();
+
 }
