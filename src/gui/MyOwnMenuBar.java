@@ -62,6 +62,7 @@ public class MyOwnMenuBar extends MenuBar {
                 main.getRoom().newGame(game);
                 main.getBagContent().newGame(game.getBag());
                 main.getExits().newGame(game);
+                main.getGoComboBox().newGame(game);
                 main.getCentralText().setText(game.returnWelcome());
             }
         });

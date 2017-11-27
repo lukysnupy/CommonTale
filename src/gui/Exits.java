@@ -51,7 +51,7 @@ public class Exits extends ListView implements Observer{
         update();
     }
 
-    public void newGame(IGame newGame){
+    void newGame(IGame newGame){
         game.getGamePlan().removeObserver(this);
         game = newGame;
         game.getGamePlan().registerObserver(this);

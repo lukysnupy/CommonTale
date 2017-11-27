@@ -2,12 +2,9 @@ package commontale;
 
 import gui.*;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -28,7 +25,7 @@ public class Main extends Application {
     private Room room;
     private BagContent bagContent;
     private Exits exits;
-    private TextField addGo;
+    private GoComboBox goComboBox;
     private TextField addCommand;
     private MyOwnMenuBar menuBar;
     private Stage stage;
@@ -57,6 +54,7 @@ public class Main extends Application {
         map = new Map(game);
         room = new Room(game);
         exits = new Exits(game);
+        goComboBox = new GoComboBox(game);
         menuBar = new MyOwnMenuBar(game,this);
         BorderPane borderPane = new BorderPane();
 
@@ -69,12 +67,12 @@ public class Main extends Application {
         Label setGo = new Label("Set where you want to go: ");
         setGo.setFont(Font.font("Arial", FontWeight.BOLD,14));
 
-        addGo = new TextField("");
-        addGo.setOnAction(new EventHandler<ActionEvent>() {
+        goComboBox.setValue("choose direction..");
+        /*goComboBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
 
-                String userCommand = addGo.getText();
+                String userCommand = goComboBox.getText();
                 if(userCommand.split("[ \t]+")[0].equals("go")){
                     String gameAnswer = game.compileCommand(userCommand);
 
@@ -89,9 +87,9 @@ public class Main extends Application {
                     addCommand.requestFocus();
                 }
 
-                addGo.setText("");
+                goComboBox.setText("");
             }
-        });
+        });*/
 
         Label setCommand = new Label("Set command: ");
         setCommand.setFont(Font.font("Arial", FontWeight.BOLD,14));
@@ -114,29 +112,21 @@ public class Main extends Application {
 
                 if(game.isOver()) {
                     addCommand.setEditable(false);
-                    addGo.setEditable(false);
                     getCentralText().appendText("\n" + game.returnEpilogue());
                 }
 
                 if(game.getTalking()){
-                    addGo.setEditable(false);
-                    addGo.setText("SPEAKING..");
-                    addCommand.requestFocus();
+                    goComboBox.setEmptyList();
                 }
                 else{
-                    addGo.setText("");
-                    addGo.setEditable(true);
-                    if(userCommand.split("[ \t]+")[0].equals("go"))
-                        addGo.requestFocus();
-                    else
-                        addCommand.requestFocus();
+                    goComboBox.update();
                 }
             }
         });
 
         FlowPane bottomPanel = new FlowPane();
         bottomPanel.setAlignment(Pos.CENTER);
-        bottomPanel.getChildren().addAll(setGo, addGo, setCommand, addCommand);
+        bottomPanel.getChildren().addAll(setGo, goComboBox, setCommand, addCommand);
 
         VBox leftPanel = new VBox();
         leftPanel.setAlignment(Pos.CENTER);
@@ -207,5 +197,9 @@ public class Main extends Application {
 
     public Exits getExits(){
         return exits;
+    }
+
+    public GoComboBox getGoComboBox(){
+        return goComboBox;
     }
 }
