@@ -244,6 +244,8 @@ public class Room extends AnchorPane implements Observer{
     private double[] getPlayerPosition(){
         if(game.getGamePlan().getCurrentLocation().getName().equals("under bridge"))
             return new double[]{125,245};
+        if(game.getGamePlan().getCurrentLocation().getName().equals("cottage"))
+            return new double[]{245,125};
         switch (game.getGamePlan().getCurrentLocation().getDirection(game.getGamePlan().getPreviousLocation())){
             case "E":
                 return new double[]{125,245};
