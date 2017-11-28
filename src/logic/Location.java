@@ -7,7 +7,7 @@ import java.util.*;
  * přechází. 
  * 
  * @author  Lukas Ruzicka
- * @version LS 2016/2017
+ * @version ZS 2017/2018
  */
 public class Location {
     private String id;
@@ -397,31 +397,58 @@ public class Location {
         return hash;
     }
 
-
+    /**
+     * Vrací y-pozici
+     * @return double y-pozice
+     */
     public double getPosTop() {
         return posTop;
     }
 
+    /**
+     * Vrací x-pozici
+     * @return double x-pozice
+     */
     public double getPosLeft() {
         return posLeft;
     }
 
+    /**
+     * Nastaví y-pozici
+     * @param posTop double y-pozice
+     */
     public void setPosTop(double posTop) {
         this.posTop = posTop;
     }
 
+    /**
+     * Nastaví x-pozici
+     * @param posLeft double x-pozice
+     */
     public void setPosLeft(double posLeft) {
         this.posLeft = posLeft;
     }
 
+    /**
+     * Vrací mapu s východama z lokace
+     * @return Map východy z lokace
+     */
     public Map<String,Location> getWaysOut(){
         return waysOut;
     }
 
+    /**
+     * Vrací seznam předmětů v lokaci
+     * @return Set předměty v lokaci
+     */
     public Set<String> getItemSet(){
         return listOfItems.keySet();
     }
 
+    /**
+     * Vrací postavu nacházející se v lokaci
+     * @return
+     */
     public String getCharacterHere(){
         return characterHere.getName();
     }

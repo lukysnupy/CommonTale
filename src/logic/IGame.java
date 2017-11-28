@@ -48,10 +48,22 @@ public interface IGame {
      */
      public GamePlan getGamePlan();
 
+    /**
+     * Vrací zda je hra v režimu mluvení
+     * @return boolean
+     */
      public boolean getTalking();
 
+    /**
+     * Vrací instanci batohu
+     * @return Bag batoh
+     */
      public Bag getBag();
 
+    /**
+     * Vrací zpátky informaci o pokroku ve hře - level (hodnoty 1-8)
+     * @return "level" hry značící pokrok v příběhu
+     */
      public int getLevel();
 
 }

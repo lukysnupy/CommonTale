@@ -10,7 +10,7 @@ import java.util.*;
  * mapu, rozmisťuje předměty a postavy.
  * 
  * @author  Lukas Ruzicka
- * @version LS 2016/2017
+ * @version ZS 2017/2018
  */
 public class GamePlan implements Subject{
     private Location currentLocation;
@@ -501,16 +501,27 @@ public class GamePlan implements Subject{
         return charSecretPlace;
     }
 
+    /**
+     * Registruje observer
+     * @param observer observer
+     */
     @Override
     public void registerObserver(Observer observer) {
         listObserver.add(observer);
     }
 
+    /**
+     * Vymaže observer
+     * @param observer observer
+     */
     @Override
     public void removeObserver(Observer observer) {
         listObserver.remove(observer);
     }
 
+    /**
+     * Aktualizuje všechny observery
+     */
     @Override
     public void notifyObservers() {
         for(Observer item : listObserver){
@@ -518,6 +529,10 @@ public class GamePlan implements Subject{
         }
     }
 
+    /**
+     * Vrací směr tajného místa
+     * @return String směr tajného místa
+     */
     public String getSecretPlaceDirection(){
         return secretPlacePosition;
     }

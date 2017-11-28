@@ -19,17 +19,31 @@ import javafx.scene.control.*;
 
 import java.util.Set;
 
+
+/**
+ * Třída BagContent představuje GUI prvek vypisující obsah batohu
+ *
+ * @author  Lukas Ruzicka
+ * @version ZS 2017/2018
+ */
 public class BagContent extends ListView implements Observer{
 
     private Bag subject;
     private ObservableList<String> bagData;
 
+    /**
+     * Konstruktor třídy BagContent
+     * @param subject batoh
+     */
     public BagContent(Bag subject){
         this.subject = subject;
         subject.registerObserver(this);
         init();
     }
 
+    /**
+     * Tato metoda je volána při změně subjectu
+     */
     @Override
     public void update() {
         bagData.remove(0,bagData.size());
@@ -41,6 +55,9 @@ public class BagContent extends ListView implements Observer{
         }
     }
 
+    /**
+     * Připraví prvek pro použití
+     */
     private void init(){
         bagData = FXCollections.observableArrayList();
         setItems(bagData);
@@ -53,6 +70,10 @@ public class BagContent extends ListView implements Observer{
         update();
     }
 
+    /**
+     * Voláno při vytvoření nové hry
+     * @param bag batoh
+     */
     public void newGame(Bag bag){
         bag.removeObserver(this);
         subject = bag;
@@ -60,12 +81,18 @@ public class BagContent extends ListView implements Observer{
         update();
     }
 
+    /**
+     * Třída pro vytvoření prvku ListView
+     */
     static class XCell extends ListCell<String>{
 
         private HBox hBox = new HBox();
         private ImageView icon = new ImageView();
         private Label text = new Label("");
 
+        /**
+         * Konstruktor prvku ListView
+         */
         public XCell(){
             text.setFont(Font.font("Sans", FontWeight.SEMI_BOLD,15));
             text.setAlignment(Pos.CENTER);
@@ -73,6 +100,11 @@ public class BagContent extends ListView implements Observer{
             hBox.getChildren().addAll(icon,text);
         }
 
+        /**
+         * Metoda aktualizuje prvek ListView
+         * @param item předmět
+         * @param empty prázdný
+         */
         @Override
         protected void updateItem(String item, boolean empty){
             super.updateItem(item,empty);

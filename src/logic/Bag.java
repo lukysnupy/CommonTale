@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logic;
 
 import util.Observer;
@@ -16,7 +11,7 @@ import java.util.*;
  * zahodit. Batoh je na začátku hry v logice zamčený (atribut locked), v rámci
  * příběhu hráč batoh ještě nemá, jakmile ho získá, bude zde odemčen.
  * @author  Lukas Ruzicka
- * @version LS 2016/2017
+ * @version ZS 2017/2018
  */
 public class Bag implements Subject{
     private boolean locked;
@@ -194,16 +189,27 @@ public class Bag implements Subject{
         return bagContent.containsKey(name);
     }
 
+    /**
+     * Registruje observer
+     * @param observer observer
+     */
     @Override
     public void registerObserver(Observer observer) {
         listObserver.add(observer);
     }
 
+    /**
+     * Vymaže observer
+     * @param observer observer
+     */
     @Override
     public void removeObserver(Observer observer) {
         listObserver.remove(observer);
     }
 
+    /**
+     * Aktualizuje všechny observery
+     */
     @Override
     public void notifyObservers() {
         for(Observer item : listObserver){

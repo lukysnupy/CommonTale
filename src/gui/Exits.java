@@ -19,17 +19,30 @@ import logic.Location;
 import util.Observer;
 import java.util.Map;
 
+/**
+ * Třída Exits představuje GUI prvek vypisující východy ze současné lokace
+ *
+ * @author  Lukas Ruzicka
+ * @version ZS 2017/2018
+ */
 public class Exits extends ListView implements Observer{
 
     private IGame game;
     private ObservableList<String> exitsData;
 
+    /**
+     * Konstruktor třídy Exits
+     * @param game hra
+     */
     public Exits(IGame game){
         this.game = game;
         game.getGamePlan().registerObserver(this);
         init();
     }
 
+    /**
+     * Tato metoda je volána při změně subjectu
+     */
     @Override
     public void update() {
         exitsData.remove(0,exitsData.size());
@@ -43,6 +56,9 @@ public class Exits extends ListView implements Observer{
         }
     }
 
+    /**
+     * Připraví prvek pro použití
+     */
     private void init(){
         exitsData = FXCollections.observableArrayList();
         setItems(exitsData);
@@ -55,6 +71,10 @@ public class Exits extends ListView implements Observer{
         update();
     }
 
+    /**
+     * Voláno při vytvoření nové hry
+     * @param newGame hra
+     */
     void newGame(IGame newGame){
         game.getGamePlan().removeObserver(this);
         game = newGame;
@@ -62,12 +82,18 @@ public class Exits extends ListView implements Observer{
         update();
     }
 
+    /**
+     * Třída pro vytvoření prvku ListView
+     */
     static class XCell extends ListCell<String>{
 
         private HBox hBox = new HBox();
         private ImageView icon = new ImageView();
         private Label text = new Label("");
 
+        /**
+         * Konstruktor prvku ListView
+         */
         public XCell(){
             text.setFont(Font.font("Sans", FontWeight.SEMI_BOLD,15));
             text.setAlignment(Pos.CENTER);
@@ -75,6 +101,11 @@ public class Exits extends ListView implements Observer{
             hBox.getChildren().addAll(icon,text);
         }
 
+        /**
+         * Metoda aktualizuje prvek ListView
+         * @param item předmět
+         * @param empty prázdný
+         */
         @Override
         protected void updateItem(String item, boolean empty){
             super.updateItem(item,empty);

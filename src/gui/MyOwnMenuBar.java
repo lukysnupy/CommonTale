@@ -14,17 +14,31 @@ import javafx.stage.Stage;
 import logic.Game;
 import logic.IGame;
 
+/**
+ * Třída představuje menu lištu
+ *
+ * @author  Lukas Ruzicka
+ * @version ZS 2017/2018
+ */
 public class MyOwnMenuBar extends MenuBar {
 
     private IGame game;
     private Main main;
 
+    /**
+     * Konstruktor třídy MyOwnMenuBar
+     * @param game hra
+     * @param main main
+     */
     public MyOwnMenuBar(IGame game, Main main){
         init();
         this.game = game;
         this.main = main;
     }
 
+    /**
+     * Připraví prvek pro použití
+     */
     private void init(){
         Menu newFile = new Menu("Common Tale");
         Menu help = new Menu("Help");

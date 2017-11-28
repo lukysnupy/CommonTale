@@ -7,13 +7,19 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import logic.Character;
 import logic.IGame;
 import util.Observer;
 
 import java.util.*;
 import java.util.Map;
 
+/**
+ * Třída Room představuje GUI prvek vykreslující současnou místnost a hráče, předměty a postavy nacházející se v dané
+ * místnosti.
+ *
+ * @author  Lukas Ruzicka
+ * @version ZS 2017/2018
+ */
 public class Room extends AnchorPane implements Observer{
 
     public IGame game;
@@ -25,6 +31,10 @@ public class Room extends AnchorPane implements Observer{
     private ImageView characterHere;
     private TextArea centralText;
 
+    /**
+     * Konstruktor třídy Room
+     * @param game hra
+     */
     public Room(IGame game, TextArea centralText){
         this.game = game;
         this.centralText = centralText;
@@ -32,9 +42,11 @@ public class Room extends AnchorPane implements Observer{
         init();
     }
 
+    /**
+     * Připraví prvek pro použití
+     */
     private void init(){
-        ImageView bg = new ImageView(new Image(Main.class.getResourceAsStream("/sources/room_preview.png"),
-                300,300,false,true));
+        bg = new ImageView();
 
         player = new ImageView(new Image(Main.class.getResourceAsStream("/sources/player.png"),
                 50,50,false,true));
@@ -54,6 +66,10 @@ public class Room extends AnchorPane implements Observer{
         update();
     }
 
+    /**
+     * Voláno při vytvoření nové hry
+     * @param newGame hra
+     */
     public void newGame(IGame newGame){
         game.getGamePlan().removeObserver(this);
         game = newGame;
@@ -61,6 +77,9 @@ public class Room extends AnchorPane implements Observer{
         update();
     }
 
+    /**
+     * Tato metoda je volána při změně subjectu
+     */
     @Override
     public void update() {
         //Remove all items and characters
@@ -188,8 +207,18 @@ public class Room extends AnchorPane implements Observer{
         }
         else
             characterHere = null;
+
+        //Set room background
+        bg.setImage(new Image(Main.class.getResourceAsStream("/sources/" + game.getGamePlan()
+                .getCurrentLocation().getName() + ".png"),300,300,false,
+                true));
     }
 
+    /**
+     * Vrací pozici postavy
+     * @param name jméno postavy
+     * @param character image view postavy
+     */
     private void positionCharacter(String name, ImageView character) {
         switch(name){
             case "shopgirl":
@@ -208,11 +237,19 @@ public class Room extends AnchorPane implements Observer{
         }
     }
 
+    /**
+     * Vrací pozici hráče
+     * @return double[] pozice hráče
+     */
     private double[] getPlayerPosition(){
+        if(game.getGamePlan().getCurrentLocation().getName().equals("under bridge"))
+            return new double[]{125,245};
         switch (game.getGamePlan().getCurrentLocation().getDirection(game.getGamePlan().getPreviousLocation())){
             case "E":
                 return new double[]{125,245};
             case "S":
+                if(game.getGamePlan().getCurrentLocation().getName().equals("bridge"))
+                    return new double[]{125,245};
                 return new double[]{245,125};
             case "W":
                 return new double[]{125,5};

@@ -17,7 +17,12 @@ import logic.Game;
 import logic.IGame;
 import ui.TextInterface;
 
-
+/**
+ * Main třída hry CommonTale, pomocí které se hra spouští.
+ *
+ * @author  Lukas Ruzicka
+ * @version ZS 2017/2018
+ */
 public class Main extends Application {
 
     private TextArea centralText;
@@ -31,6 +36,11 @@ public class Main extends Application {
     private MyOwnMenuBar menuBar;
     private Stage stage;
 
+    /**
+     * Main metoda spouštějící celou hru
+     *
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         if(args.length == 0)
             launch(args);
@@ -47,6 +57,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Metoda přípraví a spustí grafickou verzi hry
+     * @param primaryStage primární stage
+     */
     @Override
     public void start(Stage primaryStage) {
         this.stage = primaryStage;
@@ -202,36 +216,72 @@ public class Main extends Application {
         addCommand.requestFocus();
     }
 
+    /**
+     * Vrací instanci mapy
+     * @return Map mapa
+     */
     public Map getMap(){ return map;}
 
+    /**
+     * Vrací centrální text
+     * @return TextArea centrální text
+     */
     public TextArea getCentralText() {
         return centralText;
     }
 
+    /**
+     * Nastaví instanci hry na zadanou
+     * @param game hra
+     */
     public void setGame(IGame game) {
         this.game = game;
     }
 
+    /**
+     * Vrací stage
+     * @return Stage
+     */
     public Stage getStage() {
         return stage;
     }
 
+    /**
+     * Vrací instanci místnosti
+     * @return Room místnost
+     */
     public Room getRoom() {
         return room;
     }
 
+    /**
+     * Vrací instanci obsahu batohu
+     * @return BagContent obsah batohu
+     */
     public BagContent getBagContent(){
         return bagContent;
     }
 
+    /**
+     * Vrací instanci východů
+     * @return Exits východy
+     */
     public Exits getExits(){
         return exits;
     }
 
+    /**
+     * Vrací combo box pro příkaz go
+     * @return GoComboBox box pro příkaz go
+     */
     public GoComboBox getGoComboBox(){
         return goComboBox;
     }
 
+    /**
+     * Vrací box pro příkazy
+     * @return TextField box pro příkazy
+     */
     public TextField getCommandBox(){
         return addCommand;
     }

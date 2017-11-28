@@ -204,11 +204,19 @@ public class Game implements IGame{
         return bag.bagContentCount() == 2;
     }
 
+    /**
+     * Vrací zda je hra v režimu mluvení
+     * @return boolean
+     */
     @Override
     public boolean getTalking(){
         return talking;
     }
 
+    /**
+     * Vrací instanci batohu
+     * @return Bag batoh
+     */
     @Override
     public Bag getBag(){
         return bag;

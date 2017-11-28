@@ -7,18 +7,31 @@ import javafx.scene.layout.AnchorPane;
 import logic.IGame;
 import util.Observer;
 
+/**
+ * Třída Map představuje GUI prvek vykreslující herní mapu a pozici hráče na mapě
+ *
+ * @author  Lukas Ruzicka
+ * @version ZS 2017/2018
+ */
 public class Map extends AnchorPane implements Observer{
 
     public IGame game;
     private ImageView player;
     private ImageView bg;
 
+    /**
+     * Konstruktor třídy Map
+     * @param game hra
+     */
     public Map(IGame game){
         this.game = game;
         game.getGamePlan().registerObserver(this);
         init();
     }
 
+    /**
+     * Připraví prvek pro použití
+     */
     private void init(){
         bg = new ImageView(new Image(Main.class.getResourceAsStream("/sources/map.png"),
                 400,400,false,true));
@@ -31,6 +44,10 @@ public class Map extends AnchorPane implements Observer{
         update();
     }
 
+    /**
+     * Voláno při vytvoření nové hry
+     * @param newGame hra
+     */
     public void newGame(IGame newGame){
         game.getGamePlan().removeObserver(this);
         game = newGame;
@@ -38,6 +55,9 @@ public class Map extends AnchorPane implements Observer{
         update();
     }
 
+    /**
+     * Tato metoda je volána při změně subjectu
+     */
     @Override
     public void update() {
         setTopAnchor(player, game.getGamePlan().getCurrentLocation().getPosTop());

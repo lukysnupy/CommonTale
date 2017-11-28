@@ -17,6 +17,9 @@ public class GoComboBox extends ComboBox implements Observer{
         init();
     }
 
+    /**
+     * Tato metoda je volána při změně subjectu
+     */
     @Override
     public void update() {
         data.remove(0,data.size());
