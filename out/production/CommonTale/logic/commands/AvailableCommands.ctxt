@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=game\ gamePlan\ bag
+comment0.target=AvailableCommands(logic.Game,\ logic.GamePlan,\ logic.Bag)
+comment0.text=\r\n\ Konstruktor\ zalo\u017E\u00ED\ mapu\r\n\ @param\ game\ instance\ sou\u010Dasn\u00E9\ hry\r\n\ @param\ gamePlan\ hern\u00ED\ pl\u00E1n\r\n\ @param\ bag\ batoh\r\n
+comment1.params=command
+comment1.target=void\ addCommand(ICommand)
+comment1.text=\r\n\ P\u0159id\u00E1\ p\u0159\u00EDkaz\ do\ seznamu\ povolen\u00FDch\ p\u0159\u00EDkaz\u016F\r\n\ @param\ command\ p\u0159\u00EDkaz\ k\ p\u0159id\u00E1n\u00ED\r\n
+comment2.params=command
+comment2.target=ICommand\ getCommand(java.lang.String)
+comment2.text=\r\n\ Metoda\ vrac\u00ED\ p\u0159\u00EDkaz\ jako\ objekt.\ Paramatrem\ je\ n\u00E1zev\ p\u0159\u00EDkazu\r\n\ @param\ command\ p\u0159\u00EDkaz\ v\ textov\u00E9\ podob\u011B\r\n\ @return\ p\u0159\u00EDkaz\ (instance\ ICommand)\r\n
+comment3.params=command
+comment3.target=boolean\ isValidCommand(java.lang.String)
+comment3.text=\r\n\ Vr\u00E1t\u00ED\ logickou\ hodnotu,\ zda\ je\ p\u0159\u00EDkaz\ mo\u017En\u00E9\ pou\u017E\u00EDt,\ tzn.\ je\ v\ seznamu\r\n\ povolen\u00FDch\ p\u0159\u00EDkaz\u016F.\r\n\ @param\ command\ p\u0159\u00EDkaz\ v\ textov\u00E9\ podob\u011B\r\n\ @return\ true\ pokud\ je\ p\u0159\u00EDkaz\ valid,\ false\ pokud\ nen\u00ED\r\n
+comment4.params=
+comment4.target=void\ updateCommands()
+comment4.text=\r\n\ Vyma\u017Ee\ v\u0161echny\ p\u0159\u00EDkazy\ a\ p\u0159id\u00E1\ v\u0161echny\ povolen\u00E9\ a\ mo\u017En\u00E9\ pou\u017E\u00EDt\ v\ dan\u00E9\r\n\ situaci\ ve\ h\u0159e.\r\n
+comment5.params=
+comment5.target=java.lang.String\ returnValidCommands()
+comment5.text=\r\n\ Vrac\u00ED\ seznam\ platn\u00FDch\ p\u0159\u00EDkaz\u016F\r\n\ @return\ textov\u00FD\ \u0159etezec\ s\ v\u00FD\u010Dtem\ platn\u00FDch\ p\u0159\u00EDkaz\u016F\r\n
+numComments=6

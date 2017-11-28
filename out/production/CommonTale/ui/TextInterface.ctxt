@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=game
+comment0.target=TextInterface(logic.IGame)
+comment0.text=\r\n\ Konstruktor\ t\u0159\u00EDdy\ vytv\u00E1\u0159ej\u00EDc\u00ED\ hru\r\n\ \r\n\ @param\ game\ \r\n
+comment1.params=
+comment1.target=void\ play()
+comment1.text=\r\n\ Hlavn\u00ED\ metoda\ hry.\ Vyp\u00ED\u0161e\ \u00FAvodn\u00ED\ text\ a\ pak\ opakuje\ \u010Dten\u00ED\ a\ zpracov\u00E1v\u00E1n\u00ED\r\n\ p\u0159\u00EDkaz\u016F\ od\ hr\u00E1\u010De\ do\ konce\ hry\ (dokud\ metoda\ konecHry()\ z\ logiky\ nevr\u00E1t\u00ED\r\n\ hodnotu\ true).\ Nakonec\ vyp\u00ED\u0161e\ text\ epilogu.\r\n
+comment2.params=
+comment2.target=java.lang.String\ readLine()
+comment2.text=\r\n\ Metoda\ p\u0159e\u010Dte\ p\u0159\u00EDkaz\ z\ p\u0159\u00EDkazov\u00E9ho\ \u0159\u00E1dku\r\n\r\n\ @return\ \ \ \ vrac\u00ED\ p\u0159e\u010Dten\u00FD\ p\u0159\u00EDkaz\ jako\ instanci\ t\u0159\u00EDdy\ String\r\n
+numComments=3

@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=parametres
+comment0.target=java.lang.String\ execute(java.lang.String[])
+comment0.text=\r\n\ Metoda\ pro\ proveden\u00ED\ p\u0159\u00EDkazu\ ve\ h\u0159e.\r\n\ Po\u010Det\ parametr\u016F\ je\ z\u00E1visl\u00FD\ na\ konkr\u00E9tn\u00EDm\ p\u0159\u00EDkazu\ -\ nap\u0159.\ p\u0159\u00EDkazy\ end,\r\n\ help,\ nebo\ moves\ nemaj\u00ED\ parametry.\r\n\r\n\ @param\ \ parametres\ po\u010Det\ parametr\u016F\ z\u00E1vis\u00ED\ na\ konkr\u00E9tn\u00EDm\ p\u0159\u00EDkazu\r\n\ @return\ vrac\u00ED\ zpr\u00E1vu\ pro\ UI\r\n
+comment1.params=answer
+comment1.target=java.lang.String\ answer(java.lang.String)
+comment1.text=\r\n\ Metoda\ pro\ zpracov\u00E1n\u00ED\ odpov\u011Bdi\ v\ re\u017Eimu\ rozhovoru.\ \r\n\ @param\ answer\ odpov\u011B\u010F\ z\ konzole\r\n\ @return\ vrac\u00ED\ zpr\u00E1vu\ pro\ UI\r\n
+comment2.params=
+comment2.target=java.lang.String\ getName()
+comment2.text=\r\n\ Metoda\ vrac\u00ED\ n\u00E1zev\ p\u0159\u00EDkazu\ (slovo,\ kter\u00E9\ pou\u017E\u00EDv\u00E1\ hr\u00E1\u010D\ pro\ jeho\ vyvol\u00E1n\u00ED)\r\n\r\n\ @return\ \ \ \ nazev\ prikazu\r\n
+numComments=3
